@@ -4703,7 +4703,8 @@
                 imgContainer.style = 'position: relative';
 
                 const img = document.createElement('img');
-                img.src = imgUrl;
+                // 强制给传进来的文件名加上 static 路径
+                img.src = './static/' + imgUrl.replace('./static/', '');
                 img.className = 'sensor-image';
                 img.title = '点击利用边缘节点图像进行AI诊断';
 
