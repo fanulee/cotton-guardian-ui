@@ -4475,7 +4475,7 @@
             if (!user || !pass) return alert("账号密码必填！");
 
             try {
-                const response = await fetch('http://http://127.0.0.1:5000', {
+                const response = await fetch('http://https://cotton-guardian-backend.onrender.com', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username: user, password: pass })
