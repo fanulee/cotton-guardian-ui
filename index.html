@@ -4431,7 +4431,7 @@
 
             try {
 
-                const response = await fetch('http://https://cotton-guardian-backend.onrender.com/api/register', {
+                const response = await fetch('https://cotton-guardian-backend.onrender.com/api/register', {
 
                     method: 'POST',
 
@@ -4475,7 +4475,7 @@
             if (!user || !pass) return alert("账号密码必填！");
 
             try {
-                const response = await fetch('http://https://cotton-guardian-backend.onrender.com', {
+                const response = await fetch('https://cotton-guardian-backend.onrender.com', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username: user, password: pass })
@@ -4547,7 +4547,7 @@
         async function loadFieldsFromStorage() {
             if (!currentUser) return;
             try {
-                const res = await fetch(`http://https://cotton-guardian-backend.onrender.com/api/get_fields?username=${currentUser.username}`);
+                const res = await fetch(`https://cotton-guardian-backend.onrender.com/api/get_fields?username=${currentUser.username}`);
                 const fields = await res.json();
 
                 // 🚨 致命 Bug 修复点：必须先清空本地引用，再清理地图图层！
@@ -4582,7 +4582,7 @@
             if (!currentUser) return;
 
             try {
-                await fetch('http://https://cotton-guardian-backend.onrender.com/api/save_field', {
+                await fetch('https://cotton-guardian-backend.onrender.com/api/save_field', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -4648,7 +4648,7 @@
                 if (mockFieldsData[id].layerRef === e.layer) {
                     // 【修改】：通知后端数据库真实删除
                     try {
-                        await fetch(`http://https://cotton-guardian-backend.onrender.com/api/delete_field?username=${currentUser.username}&id=${id}`, { method: 'DELETE' });
+                        await fetch(`https://cotton-guardian-backend.onrender.com/api/delete_field?username=${currentUser.username}&id=${id}`, { method: 'DELETE' });
                     } catch (err) { console.warn("云端删除失败"); }
 
                     delete mockFieldsData[id];
@@ -4784,7 +4784,7 @@
             startIoTSimulation();
 
             try {
-                const res = await fetch(`http://https://cotton-guardian-backend.onrender.com/api/check_pending?username=${currentUser.username}&field_id=${fieldId}`);
+                const res = await fetch(`https://cotton-guardian-backend.onrender.com/api/check_pending?username=${currentUser.username}&field_id=${fieldId}`);
                 const pendingData = await res.json();
 
                 if (pendingData.has_pending) {
@@ -4842,7 +4842,7 @@
             try {
                 const formData = new FormData();
                 formData.append("file", file);
-                const res = await fetch('http://https://cotton-guardian-backend.onrender.com/api/detect', { method: 'POST', body: formData });
+                const res = await fetch('https://cotton-guardian-backend.onrender.com/api/detect', { method: 'POST', body: formData });
                 const result = await res.json();
 
                 // 🚨 核心拦截点1：如果接口返回前，用户点去了别的地方，直接丢弃结果！
@@ -4890,7 +4890,7 @@
 **重要指令**：在报告的最后一行，必须明确给出一个建议的复检时间，格式为：“建议复检时间：X天后”。`;
                     }
 
-                    const chatRes = await fetch('http://https://cotton-guardian-backend.onrender.com/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: aiPrompt }) });
+                    const chatRes = await fetch('https://cotton-guardian-backend.onrender.com/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: aiPrompt }) });
                     const chatData = await chatRes.json();
                     const advice = chatData.reply;
 
@@ -4996,7 +4996,7 @@
 
             try {
 
-                const chatResponse = await fetch('http://https://cotton-guardian-backend.onrender.com/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: prompt }) });
+                const chatResponse = await fetch('https://cotton-guardian-backend.onrender.com/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: prompt }) });
 
                 const chatData = await chatResponse.json();
 
@@ -5091,7 +5091,7 @@
             };
 
             try {
-                const res = await fetch('http://https://cotton-guardian-backend.onrender.com/api/save_record', {
+                const res = await fetch('https://cotton-guardian-backend.onrender.com/api/save_record', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(record)
                 });
 
@@ -5116,7 +5116,7 @@
             let history = [];
 
             try {
-                const res = await fetch(`http://https://cotton-guardian-backend.onrender.com/api/get_records?username=${currentUser.username}`);
+                const res = await fetch(`https://cotton-guardian-backend.onrender.com/api/get_records?username=${currentUser.username}`);
                 if (res.ok) history = await res.json();
             } catch (e) { console.warn("无法拉取云端档案"); }
 
@@ -5189,7 +5189,7 @@
             // 【关键修复 1】：从云端数据库拉取档案，彻底告别本地缓存
             let history = [];
             try {
-                const res = await fetch(`http://https://cotton-guardian-backend.onrender.com/api/get_records?username=${currentUser.username}`);
+                const res = await fetch(`https://cotton-guardian-backend.onrender.com/api/get_records?username=${currentUser.username}`);
                 history = await res.json();
             } catch (e) {
                 console.warn("大屏拉取档案记录失败");
@@ -5222,7 +5222,7 @@
             // 【关键修复 2】：增加网络容错，防止断网导致前端卡死
             document.getElementById('dashboardAiReport').innerHTML = '<span class="typing-cursor" style="color:var(--primary);">正在向大模型请求全局态势总评...</span>';
             try {
-                const aiRes = await fetch('http://https://cotton-guardian-backend.onrender.com/api/chat', {
+                const aiRes = await fetch('https://cotton-guardian-backend.onrender.com/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: "不使用加粗符号。近期数据平稳，请以老专家的口吻写一段80字的态势总结，鼓舞农户。" })
@@ -5258,7 +5258,7 @@
 
             try {
 
-                const res = await fetch('http://https://cotton-guardian-backend.onrender.com/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "不使用**加粗符号直接回答：\n" + val }) });
+                const res = await fetch('https://cotton-guardian-backend.onrender.com/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "不使用**加粗符号直接回答：\n" + val }) });
 
                 const data = await res.json();
 
