@@ -4475,7 +4475,7 @@
             if (!user || !pass) return alert("账号密码必填！");
 
             try {
-                const response = await fetch('https://cotton-api-7c71.onrender.com', {
+                const response = await fetch('https://cotton-api-7c71.onrender.com/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username: user, password: pass })
@@ -6736,15 +6736,15 @@ async function fetchRealDataFromDB() {
 }
 
 // 页面加载完成后，自动执行一次这个函数试试看
+// 页面加载完成后，自动执行初始化
 window.onload = () => {
-    // 保留你原来的初始化代码...
     checkLoginStatus();
     loadWikiData();
     updateHeaderAuthUI();
     switchView('home');
+};
     
-    // 加上这一句，测试数据库连接
-    fetchRealDataFromDB(); 
+    
 };
 
     </script>
