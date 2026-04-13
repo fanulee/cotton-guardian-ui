@@ -4851,28 +4851,40 @@
         formData.append("file", file);
         
         // 1. 调用识别接口
-        const res = await fetch(`${API_BASE_URL}/api/detect`, { method: 'POST', body: formData });
-        const result = await res.json();
-
-        // 【保护2】防串台检查：如果用户已经切换了地块，则停止本次渲染
-        if (window.activeDetectionId !== detectionId) return;
-
-        if (result.status === "success") {
-            // 更新检测到的图片和结果数
-            document.getElementById('previewImage').src = result.data.result_image;
-            aiResults.innerHTML = `<div style="background:#fef2f2; padding:12px; border-radius:8px; color:var(--danger); font-weight:bold;">本次视觉检出异常目标：${result.data.pest_count} 处</div>`;
-
-            // 2. 紧接着调用 AI 指令接口
+        // 2. 紧接着调用 AI 指令接口
             const fieldName = mockFieldsData[currentActiveFieldId].name;
+            const pestCount = result.data.pest_count;
+            const riskLevel = pestCount > 3 ? "高风险" : (pestCount > 0 ? "中风险" : "安全");
+            
+            // 🚨 关键修改：严格按照你提示词要求的 JSON 格式构造输入数据！
+            // 这里我们先用模拟的环境数据，如果你的天气接口修好了，可以换成真实变量
+            const aiInputData = {
+              "field_name": fieldName,
+              "visual_report": {
+                "pest_count": pestCount,
+                "detected_pests": pestCount > 0 ? "棉铃虫/蚜虫" : "无",
+                "risk_level": riskLevel
+              },
+              "environment_data": {
+                "temperature": 26.5,   // 模拟地表温度
+                "humidity": 45.0,      // 模拟土壤湿度
+                "wind_speed": 2.2      // 模拟风速 (适合飞防)
+              }
+            };
+
+            // 把这串 JSON 发给大模型，千万不要再加“100字以内”这种限制了
             const chatRes = await fetch(`${API_BASE_URL}/api/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: `地块"${fieldName}"检出${result.data.pest_count}处虫害。请给农户一段100字内的专业防治指令，不要加粗。` })
+                body: JSON.stringify({ 
+                    prompt: JSON.stringify(aiInputData) // 直接把 JSON 转成字符串发过去
+                })
             });
             const chatData = await chatRes.json();
             
-            // 渲染 AI 回复（移除加载动画）
-            llmContent.innerHTML = chatData.reply || "AI 暂时无法给出建议，请重试。";
+            // 渲染 AI 回复
+            // 注意：因为你的报告有 Markdown 格式，建议前端用 marked.js 解析，或者保持原样输出
+            llmContent.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.6;">${chatData.reply || "AI 暂时无法给出建议。"}</div>`;
             
             // 更新本地缓存，为归档做准备
             currentAiResultCache = { 
