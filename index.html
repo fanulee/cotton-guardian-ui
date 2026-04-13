@@ -4829,54 +4829,115 @@
 
         // 新增核心检测与 AI 逻辑（修复了导致崩溃的过期变量）
         async function executeDetection(file) {
-    const detectionId = Date.now();
-    window.activeDetectionId = detectionId;
-    const llmContent = document.getElementById('llmContent');
-    
-    // 提示正在分析
-    llmContent.innerHTML = `<span class="typing-cursor">图像已上传至云端识别引擎，请稍候...</span>`;
+            // 【修复3】：为本次检测生成唯一时间戳，用于防串台拦截
+            const detectionId = Date.now();
+            window.activeDetectionId = detectionId;
 
-    try {
-        const formData = new FormData();
-        formData.append("file", file);
-        const res = await fetch(`${API_BASE_URL}/api/detect`, { method: 'POST', body: formData });
-        const result = await res.json();
+            const llmContent = document.getElementById('llmContent');
+            if (typingInterval) clearInterval(typingInterval);
+            llmContent.innerHTML = `<span class="typing-cursor">正在结合模型特征与微气象数据，生成诊断方案...</span>`;
+            document.getElementById('llmFollowUpArea').style.display = 'none';
+            document.getElementById('actionButtonGroup').style.display = 'none';
 
-        if (window.activeDetectionId !== detectionId) return;
+            try {
+                const formData = new FormData();
+                formData.append("file", file);
+                const res = await fetch('https://cotton-api-7c71.onrender.com/api/detect', { method: 'POST', body: formData });
+                const result = await res.json();
 
-        if (result.status === "success") {
-            // 展示带有 YOLO 识别框的图片
-            document.getElementById('previewImage').src = result.data.result_image;
-            document.getElementById('aiAnalysisResults').innerHTML = 
-                `<div style="background:#fef2f2; padding:12px; border-radius:8px; color:var(--danger); font-weight:bold;">
-                    本次视觉检出异常目标：${result.data.pest_count} 处
-                 </div>`;
+                // 🚨 核心拦截点1：如果接口返回前，用户点去了别的地方，直接丢弃结果！
+                if (window.activeDetectionId !== detectionId) return;
 
-            // 紧接着请求大模型建议
-            const chatRes = await fetch(`${API_BASE_URL}/api/chat`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: `发现${result.data.pest_count}处虫害，请给农户一段100字内的专业植保建议。不要加粗。` })
-            });
-            const chatData = await chatRes.json();
-            
-            // 🚨 关键：这里直接赋值，移除 typing-cursor 彻底解决抖动
-            llmContent.innerHTML = chatData.reply; 
-            
-            // 缓存结果用于稍后归档
-            currentAiResultCache = { 
-                ...result.data, 
-                fieldId: currentActiveFieldId, 
-                advice: chatData.reply, 
-                fieldName: mockFieldsData[currentActiveFieldId].name,
-                imageBase64: result.data.result_image 
-            };
-            document.getElementById('actionButtonGroup').style.display = 'block';
-        }
-    } catch (e) {
-        llmContent.innerHTML = "<span style='color:red;'>识别超时，请检查网络并重试。</span>";
-    }
-}
+                if (result.status === "success") {
+                    const img = document.getElementById('previewImage');
+                    img.src = result.data.result_image;
+                    const pestCount = result.data.pest_count;
+
+                    let resultHtml = `<div style="background:#fef2f2; border:1px solid #fecaca; padding:12px; border-radius:8px; font-size:0.95rem;">本次视觉检出异常目标：<strong style="color:var(--danger); font-size:1.1rem;">${pestCount} 处</strong></div>`;
+
+                    if (currentPendingTask) {
+                        const diff = pestCount - currentPendingTask.pestCount;
+                        const diffText = diff > 0 ? `增加了 <span style="color:red;">${diff}</span> 处 ❌` : `减少了 <span style="color:green;">${Math.abs(diff)}</span> 处 ✅`;
+                        resultHtml += `<div style="margin-top:8px; font-size:0.9rem;">📉 相比上次诊断 (${currentPendingTask.pestCount}处)，虫害${diffText}</div>`;
+                    }
+                    document.getElementById('aiAnalysisResults').innerHTML = resultHtml;
+
+                    const fieldData = mockFieldsData[currentActiveFieldId];
+                    const badge = document.getElementById('lbl-field-risk');
+                    if (result.data.risk_level === "高风险") {
+                        fieldData.risk = "高风险"; fieldData.riskClass = "high";
+                        badge.className = "risk-badge risk-high"; badge.innerText = "高风险";
+                        fieldData.layerRef.setStyle({ color: '#ef4444', fillColor: '#ef4444' });
+                    } else {
+                        fieldData.risk = "安全"; fieldData.riskClass = "low";
+                        badge.className = "risk-badge risk-low"; badge.innerText = "安全";
+                        fieldData.layerRef.setStyle({ color: '#22c55e', fillColor: '#22c55e' });
+                    }
+                    await saveFieldToDB(currentActiveFieldId);
+
+                    const fieldName = fieldData.name;
+                    let aiPrompt = "";
+
+                    if (currentPendingTask) {
+                        aiPrompt = `你是新疆农技专家。当前地块"${fieldName}"进行【防治复检】。
+上次数据：害虫${currentPendingTask.pestCount}只，农户采取了措施：“${currentPendingTask.operation}”。
+今日数据：害虫${pestCount}只，温度${baseTemp.toFixed(1)}℃。
+要求：评估上次防治是否达标？如果未达标（虫害未降反增或减少不明显），请深度分析失败原因（例如用药时机、抗药性），并给出强化优化的二次施药方案。字数200字内，不要使用加粗符号。明确指出【复检结论：达标/未达标】。`;
+                    } else {
+                        aiPrompt = `你是新疆农技专家。当前地块"${fieldName}"进行【初次诊断】。
+今日数据：害虫${pestCount}只，温度${baseTemp.toFixed(1)}℃，风速${document.getElementById('val-wind').innerText}m/s。
+要求：给出分层多维防控方案（应急速效与绿色长效）。不要使用加粗符号。
+**重要指令**：在报告的最后一行，必须明确给出一个建议的复检时间，格式为：“建议复检时间：X天后”。`;
+                    }
+
+                    const chatRes = await fetch('https://cotton-api-7c71.onrender.com/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: aiPrompt }) });
+                    const chatData = await chatRes.json();
+                    const advice = chatData.reply;
+
+                    // 🚨 核心拦截点2：大模型思考完毕后，再次确认没切台
+                    if (window.activeDetectionId !== detectionId) return;
+
+                    currentAiResultCache = {
+                        fieldId: currentActiveFieldId, fieldName: fieldData.name,
+                        imageBase64: result.data.result_image, pestCount: pestCount,
+                        risk: fieldData.risk, advice: advice
+                    };
+
+                    llmContent.innerHTML = ''; let charIndex = 0;
+                    typingInterval = setInterval(() => {
+                        // 🚨 核心拦截点3：打字机执行期间如果用户切走，立刻刹车
+                        if (window.activeDetectionId !== detectionId) {
+                            clearInterval(typingInterval);
+                            return;
+                        }
+
+                        if (charIndex < advice.length) {
+                            llmContent.innerHTML = advice.substring(0, charIndex + 1) + '<span class="typing-cursor"></span>';
+                            charIndex++;
+                        }
+                        else {
+                            clearInterval(typingInterval);
+                            llmContent.innerHTML = advice;
+                            document.getElementById('llmFollowUpArea').style.display = 'flex';
+
+                            const btnText = currentPendingTask ? '💾 结束本次闭环并归档' : '💾 生成防治任务并入库追踪';
+                            const btnGroup = document.getElementById('actionButtonGroup');
+
+                            // 【修复4】：强行加 margin-bottom 兜底，防止按键被切掉，并赋予点击事件
+                            btnGroup.innerHTML = `<button class="btn-primary" style="margin-bottom: 40px;" onclick="openRecordModal()">${btnText}</button>`;
+                            btnGroup.style.display = 'block';
+
+                            // 【修复5】：让侧边栏平滑地滚到底部，确保按钮完美呈现在视野正中央
+                            const panel = document.querySelector('.side-panel');
+                            panel.scrollTo({ top: panel.scrollHeight, behavior: 'smooth' });
+                        }
+                    }, 30);
+                }
+            } catch (e) {
+                if (window.activeDetectionId === detectionId) {
+                    llmContent.innerHTML = `<span style='color:red;'>程序执行出错: ${e.message}</span>`;
+                }
+            }
 
 
 
