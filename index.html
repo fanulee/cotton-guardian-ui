@@ -4830,7 +4830,8 @@
         }
 
         // 新增核心检测与 AI 逻辑（修复了导致崩溃的过期变量）
-        async function executeDetection(file) {
+        // 核心检测与 AI 逻辑
+async function executeDetection(file) {
     // 【保护1】防止地块未选导致的系统崩溃
     if (!currentActiveFieldId || !mockFieldsData[currentActiveFieldId]) {
         alert("请先在左侧地图点击选择一个地块！");
@@ -4850,41 +4851,52 @@
         const formData = new FormData();
         formData.append("file", file);
         
-        // 1. 调用识别接口
-        // 2. 紧接着调用 AI 指令接口
-            const fieldName = mockFieldsData[currentActiveFieldId].name;
+        // 1. 调用 YOLO 视觉识别接口
+        const res = await fetch(`${API_BASE_URL}/api/detect`, { method: 'POST', body: formData });
+        const result = await res.json();
+
+        // 【保护2】防串台检查：如果用户已经切换了地块，则停止本次渲染
+        if (window.activeDetectionId !== detectionId) return;
+
+        if (result.status === "success") {
+            // 更新检测到的图片和结果数
+            document.getElementById('previewImage').src = result.data.result_image;
             const pestCount = result.data.pest_count;
+            aiResults.innerHTML = `<div style="background:#fef2f2; padding:12px; border-radius:8px; color:var(--danger); font-weight:bold;">本次视觉检出异常目标：${pestCount} 处</div>`;
+
+            // 2. 紧接着调用 AI 指令接口 (应用高级 JSON 提示词)
+            const fieldName = mockFieldsData[currentActiveFieldId].name;
             const riskLevel = pestCount > 3 ? "高风险" : (pestCount > 0 ? "中风险" : "安全");
             
-            // 🚨 关键修改：严格按照你提示词要求的 JSON 格式构造输入数据！
-            // 这里我们先用模拟的环境数据，如果你的天气接口修好了，可以换成真实变量
+            // 构造严格符合 RAG 要求的 JSON 输入
             const aiInputData = {
-              "field_name": fieldName,
-              "visual_report": {
-                "pest_count": pestCount,
-                "detected_pests": pestCount > 0 ? "棉铃虫/蚜虫" : "无",
-                "risk_level": riskLevel
-              },
-              "environment_data": {
-                "temperature": 26.5,   // 模拟地表温度
-                "humidity": 45.0,      // 模拟土壤湿度
-                "wind_speed": 2.2      // 模拟风速 (适合飞防)
-              }
+                "field_name": fieldName,
+                "visual_report": {
+                    "pest_count": pestCount,
+                    "detected_pests": pestCount > 0 ? "棉铃虫/蚜虫" : "无",
+                    "risk_level": riskLevel
+                },
+                "environment_data": {
+                    "temperature": 26.5,   // 模拟地表温度
+                    "humidity": 45.0,      // 模拟土壤湿度
+                    "wind_speed": 2.2      // 模拟风速 (适合飞防)
+                }
             };
 
-            // 把这串 JSON 发给大模型，千万不要再加“100字以内”这种限制了
+            llmContent.innerHTML = `<span class="typing-cursor">视觉诊断完成，正在生成《数智化防控决策报告》...</span>`;
+            
+            // 发送请求给 Coze 大模型
             const chatRes = await fetch(`${API_BASE_URL}/api/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    prompt: JSON.stringify(aiInputData) // 直接把 JSON 转成字符串发过去
+                    prompt: JSON.stringify(aiInputData) // 直接传递 JSON 字符串
                 })
             });
             const chatData = await chatRes.json();
             
-            // 渲染 AI 回复
-            // 注意：因为你的报告有 Markdown 格式，建议前端用 marked.js 解析，或者保持原样输出
-            llmContent.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.6;">${chatData.reply || "AI 暂时无法给出建议。"}</div>`;
+            // 渲染 AI 回复（支持多行和基础排版）
+            llmContent.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.6;">${chatData.reply || "AI 暂时无法给出建议，请重试。"}</div>`;
             
             // 更新本地缓存，为归档做准备
             currentAiResultCache = { 
@@ -4902,12 +4914,14 @@
         } else {
             llmContent.innerHTML = "识别失败：" + result.message;
         }
+
+    // 🚨 下面就是刚才不小心丢掉的 catch 模块，现在完美闭合了！
     } catch (e) {
-        console.error(e);
-        llmContent.innerHTML = "<span style='color:red;'>网络连接超时，请确认后端 Render 已启动并处于 Live 状态。</span>";
+        console.error("系统执行异常:", e);
+        llmContent.innerHTML = "<span style='color:red;'>网络连接超时或解析错误，请确认后端 Render 已启动并处于 Live 状态。</span>";
     }
 }
-
+      
 
 
         async function sendFollowUp() {
