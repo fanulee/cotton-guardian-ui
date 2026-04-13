@@ -4829,52 +4829,68 @@
 
         // 新增核心检测与 AI 逻辑（修复了导致崩溃的过期变量）
         async function executeDetection(file) {
+    // 【保护1】防止地块未选导致的系统崩溃
+    if (!currentActiveFieldId || !mockFieldsData[currentActiveFieldId]) {
+        alert("请先在左侧地图点击选择一个地块！");
+        return;
+    }
+
     const detectionId = Date.now();
     window.activeDetectionId = detectionId;
     const llmContent = document.getElementById('llmContent');
+    const aiResults = document.getElementById('aiAnalysisResults');
     
-    // 提示正在分析
-    llmContent.innerHTML = `<span class="typing-cursor">图像已上传至云端识别引擎，请稍候...</span>`;
+    // 初始化状态
+    llmContent.innerHTML = `<span class="typing-cursor">正在上传图像并呼叫云端 AI 识别引擎...</span>`;
+    aiResults.innerHTML = "正在分析中...";
 
     try {
         const formData = new FormData();
         formData.append("file", file);
+        
+        // 1. 调用识别接口
         const res = await fetch(`${API_BASE_URL}/api/detect`, { method: 'POST', body: formData });
         const result = await res.json();
 
+        // 【保护2】防串台检查：如果用户已经切换了地块，则停止本次渲染
         if (window.activeDetectionId !== detectionId) return;
 
         if (result.status === "success") {
-            // 展示带有 YOLO 识别框的图片
+            // 更新检测到的图片和结果数
             document.getElementById('previewImage').src = result.data.result_image;
-            document.getElementById('aiAnalysisResults').innerHTML = 
-                `<div style="background:#fef2f2; padding:12px; border-radius:8px; color:var(--danger); font-weight:bold;">
-                    本次视觉检出异常目标：${result.data.pest_count} 处
-                 </div>`;
+            aiResults.innerHTML = `<div style="background:#fef2f2; padding:12px; border-radius:8px; color:var(--danger); font-weight:bold;">本次视觉检出异常目标：${result.data.pest_count} 处</div>`;
 
-            // 紧接着请求大模型建议
+            // 2. 紧接着调用 AI 指令接口
+            const fieldName = mockFieldsData[currentActiveFieldId].name;
             const chatRes = await fetch(`${API_BASE_URL}/api/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: `发现${result.data.pest_count}处虫害，请给农户一段100字内的专业植保建议。不要加粗。` })
+                body: JSON.stringify({ prompt: `地块"${fieldName}"检出${result.data.pest_count}处虫害。请给农户一段100字内的专业防治指令，不要加粗。` })
             });
             const chatData = await chatRes.json();
             
-            // 🚨 关键：这里直接赋值，移除 typing-cursor 彻底解决抖动
-            llmContent.innerHTML = chatData.reply; 
+            // 渲染 AI 回复（移除加载动画）
+            llmContent.innerHTML = chatData.reply || "AI 暂时无法给出建议，请重试。";
             
-            // 缓存结果用于稍后归档
+            // 更新本地缓存，为归档做准备
             currentAiResultCache = { 
                 ...result.data, 
                 fieldId: currentActiveFieldId, 
-                advice: chatData.reply, 
-                fieldName: mockFieldsData[currentActiveFieldId].name,
+                fieldName: fieldName,
+                advice: chatData.reply,
                 imageBase64: result.data.result_image 
             };
-            document.getElementById('actionButtonGroup').style.display = 'block';
+            
+            // 显示归档按钮
+            if(document.getElementById('actionButtonGroup')) document.getElementById('actionButtonGroup').style.display = 'block';
+            if(document.getElementById('btn-save-rec')) document.getElementById('btn-save-rec').style.display = 'block';
+
+        } else {
+            llmContent.innerHTML = "识别失败：" + result.message;
         }
     } catch (e) {
-        llmContent.innerHTML = "<span style='color:red;'>识别超时，请检查网络并重试。</span>";
+        console.error(e);
+        llmContent.innerHTML = "<span style='color:red;'>网络连接超时，请确认后端 Render 已启动并处于 Live 状态。</span>";
     }
 }
 
