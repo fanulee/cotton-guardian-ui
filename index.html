@@ -4824,7 +4824,7 @@
             document.getElementById('uploadZone').style.display = 'none';
 
             // 调用核心检测逻辑
-            await executeDetection(file);
+            await Detection(file);
         }
 
         // 新增核心检测与 AI 逻辑（修复了导致崩溃的过期变量）
@@ -5989,6 +5989,7 @@
             const weatherContent = document.getElementById('weatherContent');
 
             weatherContent.innerHTML = '<div class="weather-loading">正在加载天气数据</div>';
+        }
 
 
 
