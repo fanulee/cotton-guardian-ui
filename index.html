@@ -208,14 +208,8 @@
             }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --------------------------------------------------------- */
@@ -274,7 +268,6 @@
             padding: 40px 30px;
             flex: 1;
             box-shadow: var(--shadow-md);
-            border-top: 4px solid var(--portal-green);
             display: flex;
             flex-direction: column;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -285,43 +278,11 @@
                 box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             }
 
-        .f-icon {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-        }
-
-        .f-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #1e293b;
-            margin-bottom: 15px;
-        }
-
-        .f-desc {
-            color: var(--text-light);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            flex: 1;
-        }
-
-        .f-btn {
-            align-self: flex-start;
-            padding: 8px 25px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            color: var(--primary);
-            font-weight: bold;
-            background: white;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-            .f-btn:hover {
-                border-color: var(--portal-green);
-                background: var(--portal-green);
-                color: white;
-            }
+        .f-icon { font-size: 2.8rem; margin-bottom: 15px; }
+        .f-title { font-size: 1.3rem; font-weight: bold; color: #1e293b; margin-bottom: 15px; }
+        .f-desc { color: var(--text-light); line-height: 1.6; font-size: 0.95rem; margin-bottom: 25px; flex: 1; }
+        .f-btn { align-self: flex-start; padding: 8px 25px; border: 1px solid var(--border); border-radius: 20px; font-weight: bold; background: white; cursor: pointer; transition: 0.3s; }
+        .f-btn:hover { color: white !important; }
 
         .portal-footer {
             background: #064e3b;
@@ -339,1522 +300,212 @@
             margin-bottom: 20px;
         }
 
-            .footer-links a {
-                color: #cbd5e1;
-                text-decoration: none;
-                transition: 0.3s;
-                cursor: pointer;
-            }
+            .footer-links a { color: #cbd5e1; text-decoration: none; transition: 0.3s; cursor: pointer; }
+            .footer-links a:hover { color: white; }
 
-                .footer-links a:hover {
-                    color: white;
-                }
-
-        .footer-copy {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            opacity: 0.7;
-        }
+        .footer-copy { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; opacity: 0.7; }
 
         /* --------------------------------------------------------- */
         /* 📍 视图 B：绝对独立的地块监测台 (Monitor View) */
         /* --------------------------------------------------------- */
-        #view-monitor {
-            flex-direction: row;
-            overflow: hidden;
-        }
+        #view-monitor { flex-direction: row; overflow: hidden; }
+        #map-container { flex: 3; position: relative; border-right: 1px solid var(--border); }
+        #map { width: 100%; height: 100%; }
 
-        #map-container {
-            flex: 3;
-            position: relative;
-            border-right: 1px solid var(--border);
-        }
-
-        #map {
-            width: 100%;
-            height: 100%;
-        }
-
-        .side-panel {
-            flex: 2;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            overflow-y: auto;
-            padding: 25px;
-        }
-
-        .field-header {
-            font-size: 1.2rem;
-            color: var(--primary);
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed var(--border);
-        }
-
-        .risk-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
+        .side-panel { flex: 2; background: white; display: flex; flex-direction: column; height: 100%; overflow-y: auto; padding: 25px; }
+        .field-header { font-size: 1.2rem; color: var(--primary); font-weight: bold; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border); }
+        .risk-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .risk-high { background: var(--danger); }
         .risk-low { background: var(--success); }
         .risk-pending { background: #94a3b8; }
 
-        .iot-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+        .iot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        .iot-card { background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; transition: 0.3s; }
+        .iot-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+        .iot-val { font-size: 1.2rem; font-weight: bold; color: var(--primary); margin: 5px 0; font-family: monospace; }
+        .iot-card small { color: var(--text-light); font-size: 0.75rem; }
 
-        .iot-card {
-            background: var(--bg-main);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            transition: 0.3s;
-        }
+        .upload-zone { border: 2px dashed var(--portal-green); border-radius: 8px; padding: 30px 20px; text-align: center; cursor: pointer; background: #ebfef5; color: var(--primary); font-weight: bold; transition: 0.3s; margin-bottom: 20px; }
+        .upload-zone:hover { border-color: var(--accent); background: white; }
+        .preview-img { width: 100%; border-radius: 8px; display: none; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
 
-            .iot-card:hover {
-                transform: translateY(-2px);
-                box-shadow: var(--shadow-sm);
-            }
-
-        .iot-val {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 5px 0;
-            font-family: monospace;
-        }
-
-        .iot-card small {
-            color: var(--text-light);
-            font-size: 0.75rem;
-        }
-
-        .upload-zone {
-            border: 2px dashed var(--portal-green);
-            border-radius: 8px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            background: #ebfef5;
-            color: var(--primary);
-            font-weight: bold;
-            transition: 0.3s;
-            margin-bottom: 20px;
-        }
-
-            .upload-zone:hover {
-                border-color: var(--accent);
-                background: white;
-            }
-
-        .preview-img {
-            width: 100%;
-            border-radius: 8px;
-            display: none;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .llm-container {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .llm-header {
-            background: #f8fafc;
-            padding: 10px 15px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            border-bottom: 1px solid var(--border);
-            color: var(--primary);
-        }
-
-        .llm-body {
-            padding: 15px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #334155;
-            white-space: pre-wrap;
-        }
-
-        .follow-up-area {
-            display: flex;
-            gap: 8px;
-            padding: 15px;
-            background: #f8fafc;
-            border-top: 1px dashed var(--border);
-            align-items: center;
-        }
-
-        .follow-up-input {
-            flex: 1;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 0.9rem;
-            outline: none;
-            font-family: inherit;
-            transition: 0.3s;
-        }
-
-            .follow-up-input:focus {
-                border-color: var(--portal-green);
-            }
-
-        .follow-up-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0 15px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            height: 35px;
-            transition: 0.3s;
-        }
-
-            .follow-up-btn:hover {
-                background: #14532d;
-            }
-
-        .btn-primary {
-            background: var(--portal-green);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            width: 100%;
-            font-size: 1rem;
-            box-shadow: 0 4px 10px rgba(52,211,153,0.2);
-        }
-
-            .btn-primary:hover {
-                background: var(--accent);
-                transform: translateY(-2px);
-            }
+        .llm-container { background: white; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+        .llm-header { background: #f8fafc; padding: 10px 15px; font-size: 0.95rem; font-weight: bold; border-bottom: 1px solid var(--border); color: var(--primary); }
+        .llm-body { padding: 15px; font-size: 0.95rem; line-height: 1.6; color: #334155; white-space: pre-wrap; }
+        .follow-up-area { display: flex; gap: 8px; padding: 15px; background: #f8fafc; border-top: 1px dashed var(--border); align-items: center; }
+        .follow-up-input { flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 0.9rem; outline: none; font-family: inherit; transition: 0.3s; }
+        .follow-up-input:focus { border-color: var(--portal-green); }
+        .follow-up-btn { background: var(--primary); color: white; border: none; border-radius: 8px; padding: 0 15px; font-size: 0.85rem; font-weight: bold; cursor: pointer; height: 35px; transition: 0.3s; }
+        .follow-up-btn:hover { background: #14532d; }
+        .btn-primary { background: var(--portal-green); color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; width: 100%; font-size: 1rem; box-shadow: 0 4px 10px rgba(52,211,153,0.2); }
+        .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
 
         /* --------------------------------------------------------- */
         /* 📍 视图 C：独立的档案库 (Records View) */
         /* --------------------------------------------------------- */
-        #view-records {
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        .records-wrapper {
-            width: 100%;
-            max-width: 1000px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .record-group {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .record-group-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--primary);
-            padding: 18px 20px;
-            cursor: pointer;
-            background: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-            .record-group-title:hover {
-                background: #f8fafc;
-            }
-
-        .record-count-tag {
-            font-size: 0.8rem;
-            font-weight: normal;
-            background: var(--bg-main);
-            border: 1px solid var(--secondary);
-            padding: 3px 10px;
-            border-radius: 12px;
-            margin-left: 10px;
-            color: var(--primary);
-        }
-
-        .record-content {
-            padding: 20px;
-            border-top: 1px dashed var(--border);
-            background: #fafafa;
-            display: none;
-        }
-
-            .record-content.open {
-                display: block;
-                animation: fadeIn 0.3s ease;
-            }
-
-        .record-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 18px;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 20px;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-        }
-
-        .record-img {
-            width: 140px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .record-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-size: 0.95rem;
-        }
-
-        .record-advice {
-            background: #f8fafc;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: #334155;
-            margin: 5px 0;
-            border-left: 4px solid var(--portal-green);
-            white-space: pre-wrap;
-            line-height: 1.6;
-        }
-
-        .record-op {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px dashed var(--border);
-            padding-top: 12px;
-            margin-top: 5px;
-            color: var(--primary);
-            font-weight: bold;
-        }
+        #view-records { flex-direction: column; align-items: center; padding: 40px 20px; }
+        .records-wrapper { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 20px; }
+        .record-group { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .record-group-title { font-weight: bold; font-size: 1.1rem; color: var(--primary); padding: 18px 20px; cursor: pointer; background: #ffffff; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .record-group-title:hover { background: #f8fafc; }
+        .record-count-tag { font-size: 0.8rem; font-weight: normal; background: var(--bg-main); border: 1px solid var(--secondary); padding: 3px 10px; border-radius: 12px; margin-left: 10px; color: var(--primary); }
+        .record-content { padding: 20px; border-top: 1px dashed var(--border); background: #fafafa; display: none; }
+        .record-content.open { display: block; animation: fadeIn 0.3s ease; }
+        .record-card { border: 1px solid var(--border); border-radius: 8px; padding: 18px; margin-bottom: 15px; display: flex; gap: 20px; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .record-img { width: 140px; height: 100px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; }
+        .record-details { flex: 1; display: flex; flex-direction: column; gap: 8px; font-size: 0.95rem; }
+        .record-advice { background: #f8fafc; padding: 12px; border-radius: 8px; font-size: 0.9rem; color: #334155; margin: 5px 0; border-left: 4px solid var(--portal-green); white-space: pre-wrap; line-height: 1.6; }
+        .record-op { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border); padding-top: 12px; margin-top: 5px; color: var(--primary); font-weight: bold; }
 
         /* --------------------------------------------------------- */
         /* 📍 视图 D：全域态势大屏 (Dashboard View) */
         /* --------------------------------------------------------- */
-        #view-dashboard {
-            flex-direction: column;
-            padding: 40px 20px;
-            align-items: center;
-            background: #f1f5f9;
-        }
-
-        .dash-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .dash-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-        }
-
-        .ai-report-card {
-            background: linear-gradient(135deg, #0f5132, #10b981);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 15px 25px -5px rgba(16,185,129,0.4);
-        }
+        #view-dashboard { flex-direction: column; padding: 40px 20px; align-items: center; background: #f1f5f9; }
+        .dash-wrapper { width: 100%; max-width: 1200px; display: flex; flex-direction: column; gap: 25px; }
+        .dash-card { background: white; border-radius: 16px; padding: 25px; border: 1px solid var(--border); box-shadow: var(--shadow-md); }
+        .ai-report-card { background: linear-gradient(135deg, #0f5132, #10b981); color: white; padding: 30px; border-radius: 16px; box-shadow: 0 15px 25px -5px rgba(16,185,129,0.4); }
 
         /* --------------------------------------------------------- */
         /* 📍 视图 E：独立 AI 对话页 (Agent View) */
         /* --------------------------------------------------------- */
-        #view-agent {
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: #f8fafc;
-        }
-
-        .chat-container {
-            width: 100%;
-            max-width: 900px;
-            height: 90%;
-            display: flex;
-            flex-direction: column;
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background: var(--bg-main);
-            color: var(--primary);
-            padding: 18px 25px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .chat-box {
-            flex: 1;
-            padding: 25px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            background: white;
-        }
-
-        .chat-msg {
-            max-width: 85%;
-            display: flex;
-            flex-direction: column;
-        }
-
-            .chat-msg.user {
-                align-self: flex-end;
-                align-items: flex-end;
-            }
-
-            .chat-msg.ai {
-                align-self: flex-start;
-                align-items: flex-start;
-            }
-
-        .msg-bubble {
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-size: 1rem;
-            line-height: 1.7;
-            white-space: pre-wrap;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-
-        .chat-msg.user .msg-bubble {
-            background: #ecfdf5;
-            border-bottom-right-radius: 4px;
-            color: #065f46;
-            border: 1px solid #d1fae5;
-        }
-
-        .chat-msg.ai .msg-bubble {
-            background: #f8fafc;
-            border-bottom-left-radius: 4px;
-            color: #334155;
-            border: 1px solid var(--border);
-        }
-
-        .msg-role {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-bottom: 6px;
-        }
-
-        .chat-input-area {
-            padding: 18px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            background: #f8fafc;
-        }
-
-        .chat-input {
-            flex: 1;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px;
-            font-size: 1rem;
-            resize: none;
-            outline: none;
-            font-family: inherit;
-            transition: 0.3s;
-        }
-
-            .chat-input:focus {
-                border-color: var(--portal-green);
-                box-shadow: 0 0 0 3px rgba(52,211,153,0.15);
-            }
-
-        .chat-send-btn {
-            background: var(--portal-green);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 0 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(52,211,153,0.2);
-        }
+        #view-agent { justify-content: center; align-items: center; padding: 20px; background: #f8fafc; }
+        .chat-container { width: 100%; max-width: 900px; height: 90%; display: flex; flex-direction: column; background: white; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border); overflow: hidden; }
+        .chat-header { background: var(--bg-main); color: var(--primary); padding: 18px 25px; font-weight: bold; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+        .chat-box { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; background: white; }
+        .chat-msg { max-width: 85%; display: flex; flex-direction: column; }
+        .chat-msg.user { align-self: flex-end; align-items: flex-end; }
+        .chat-msg.ai { align-self: flex-start; align-items: flex-start; }
+        .msg-bubble { padding: 14px 20px; border-radius: 12px; font-size: 1rem; line-height: 1.7; white-space: pre-wrap; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .chat-msg.user .msg-bubble { background: #ecfdf5; border-bottom-right-radius: 4px; color: #065f46; border: 1px solid #d1fae5; }
+        .chat-msg.ai .msg-bubble { background: #f8fafc; border-bottom-left-radius: 4px; color: #334155; border: 1px solid var(--border); }
+        .msg-role { font-size: 0.8rem; color: var(--text-light); margin-bottom: 6px; }
+        .chat-input-area { padding: 18px; border-top: 1px solid var(--border); display: flex; gap: 12px; background: #f8fafc; }
+        .chat-input { flex: 1; border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 1rem; resize: none; outline: none; font-family: inherit; transition: 0.3s; }
+        .chat-input:focus { border-color: var(--portal-green); box-shadow: 0 0 0 3px rgba(52,211,153,0.15); }
+        .chat-send-btn { background: var(--portal-green); color: white; border: none; border-radius: 10px; padding: 0 25px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(52,211,153,0.2); }
 
         /* ========================================================= */
         /* 弹窗样式 */
         /* ========================================================= */
-        #login-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15,81,50,0.4);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(8px);
-        }
-
-        .auth-card {
-            background: white;
-            width: 380px;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-            text-align: center;
-            position: relative;
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            box-sizing: border-box;
-            outline: none;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-            .auth-input:focus {
-                border-color: var(--portal-green);
-            }
-
-        .typing-cursor::after {
-            content: '▋';
-            animation: blink 1s step-end infinite;
-            color: var(--portal-green);
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: #475569;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-            .btn-outline:hover {
-                background: #f1f5f9;
-            }
+        #login-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,81,50,0.4); z-index: 9999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
+        .auth-card { background: white; width: 380px; padding: 40px; border-radius: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.2); text-align: center; position: relative; }
+        .auth-input { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; outline: none; font-size: 0.95rem; transition: 0.3s; }
+        .auth-input:focus { border-color: var(--portal-green); }
+        .typing-cursor::after { content: '▋'; animation: blink 1s step-end infinite; color: var(--portal-green); }
+        @keyframes blink { 50% { opacity: 0; } }
+        input[type="file"] { display: none; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: #475569; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-outline:hover { background: #f1f5f9; }
 
         /* 🚀 边缘节点传感器图集 CSS */
-        .sensor-gallery {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        .sensor-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 2px solid var(--border);
-            cursor: pointer;
-            transition: 0.3s;
-            flex-shrink: 0;
-        }
-
-            .sensor-image:hover {
-                transform: scale(1.05);
-                border-color: var(--portal-green);
-                box-shadow: 0 4px 12px rgba(52,211,153,0.3);
-            }
-
-        /* 传感器状态指示器 */
-        .sensor-status {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #10b981;
-            box-shadow: 0 0 5px rgba(16,185,129,0.5);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        .sensor-gallery { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; }
+        .sensor-image { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; border: 2px solid var(--border); cursor: pointer; transition: 0.3s; flex-shrink: 0; }
+        .sensor-image:hover { transform: scale(1.05); border-color: var(--portal-green); box-shadow: 0 4px 12px rgba(52,211,153,0.3); }
+        .sensor-status { position: absolute; bottom: 5px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 5px rgba(16,185,129,0.5); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
 
         /* ========================================================= */
         /* 🚀 首页横向时间线 (Timeline) */
         /* ========================================================= */
-        .timeline-section {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-            box-sizing: border-box;
-            z-index: 10;
-        }
-
-        .timeline-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-            .timeline-header h2 {
-                color: var(--primary);
-                font-size: 2rem;
-                margin-bottom: 10px;
-            }
-
-            .timeline-header p {
-                color: var(--text-light);
-                font-size: 1rem;
-            }
-
-        .timeline-header-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-        }
-
-        .timeline-content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .edit-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-            .edit-btn:hover {
-                background-color: var(--primary-dark);
-                transform: translateY(-2px);
-            }
-
-            .edit-btn.small {
-                padding: 4px 10px;
-                font-size: 0.75rem;
-            }
+        .timeline-section { width: 100%; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; box-sizing: border-box; z-index: 10; }
+        .timeline-header { text-align: center; margin-bottom: 50px; }
+        .timeline-header h2 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
+        .timeline-header p { color: var(--text-light); font-size: 1rem; }
+        .timeline-header-actions { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+        .timeline-content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .edit-btn { background-color: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+        .edit-btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        .edit-btn.small { padding: 4px 10px; font-size: 0.75rem; }
 
         /* 模态框样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-
-            .modal-header h3 {
-                margin: 0;
-                color: var(--primary);
-            }
-
-        .close {
-            color: var(--text-light);
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-            .close:hover {
-                color: var(--primary);
-            }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: bold;
-                color: var(--text);
-            }
-
-            .form-group input,
-            .form-group textarea {
-                width: 100%;
-                padding: 8px;
-                border: 1px solid var(--border);
-                border-radius: 6px;
-                box-sizing: border-box;
-            }
-
-            .form-group textarea {
-                resize: vertical;
-            }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-        }
-
-        .cancel-btn {
-            background-color: #f1f5f9;
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-            .cancel-btn:hover {
-                background-color: #e2e8f0;
-            }
-
-        .save-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-            .save-btn:hover {
-                background-color: var(--primary-dark);
-            }
-
-        .timeline-wrapper {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
-
-            /* 贯穿时间线的横向连接线 */
-            .timeline-wrapper::before {
-                content: '';
-                position: absolute;
-                top: 22px; 
-                left: 5%;
-                width: 90%;
-                height: 3px;
-                background: #e2e8f0;
-                z-index: 1;
-            }
-
-        .timeline-item {
-            flex: 1;
-            position: relative;
-            z-index: 2;
-            padding: 0 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .timeline-time {
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--portal-green);
-            margin-bottom: 15px;
-            background: var(--bg-main);
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid var(--portal-green);
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(52,211,153,0.1);
-        }
-
-        .timeline-dot {
-            width: 20px;
-            height: 20px;
-            background: white;
-            border: 4px solid var(--accent);
-            border-radius: 50%;
-            margin-bottom: 25px;
-            box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.15);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .timeline-item:hover .timeline-dot {
-            transform: scale(1.4);
-            background: var(--portal-green);
-            border-color: white;
-            box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.3);
-        }
-
-        .timeline-content {
-            background: white;
-            padding: 25px 20px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 100%;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-            /* 给内容卡片加上方小箭头 */
-            .timeline-content::before {
-                content: '';
-                position: absolute;
-                top: -8px;
-                left: 50%;
-                transform: translateX(-50%) rotate(45deg);
-                width: 15px;
-                height: 15px;
-                background: white;
-                border-top: 1px solid var(--border);
-                border-left: 1px solid var(--border);
-                transition: 0.4s;
-            }
-
-        .timeline-item:hover .timeline-content {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--portal-green);
-        }
-
-            .timeline-item:hover .timeline-content::before {
-                border-color: var(--portal-green);
-            }
-
-        .timeline-content h4 {
-            margin: 0 0 12px 0;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .timeline-content p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); }
+        .modal-content { background-color: #fff; margin: 15% auto; padding: 20px; border-radius: 10px; width: 90%; max-width: 500px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        .modal-header h3 { margin: 0; color: var(--primary); }
+        .close { color: var(--text-light); font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: var(--primary); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--text); }
+        .form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; box-sizing: border-box; }
+        .form-group textarea { resize: vertical; }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); }
+        .cancel-btn { background-color: #f1f5f9; color: var(--text); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .cancel-btn:hover { background-color: #e2e8f0; }
+        .save-btn { background-color: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .save-btn:hover { background-color: var(--primary-dark); }
+        .timeline-wrapper { display: flex; justify-content: space-between; position: relative; }
+        .timeline-wrapper::before { content: ''; position: absolute; top: 22px; left: 5%; width: 90%; height: 3px; background: #e2e8f0; z-index: 1; }
+        .timeline-item { flex: 1; position: relative; z-index: 2; padding: 0 15px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .timeline-time { font-size: 1rem; font-weight: bold; color: var(--portal-green); margin-bottom: 15px; background: var(--bg-main); padding: 6px 16px; border-radius: 20px; border: 1px solid var(--portal-green); display: inline-block; box-shadow: 0 4px 10px rgba(52,211,153,0.1); }
+        .timeline-dot { width: 20px; height: 20px; background: white; border: 4px solid var(--accent); border-radius: 50%; margin-bottom: 25px; box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.15); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .timeline-item:hover .timeline-dot { transform: scale(1.4); background: var(--portal-green); border-color: white; box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.3); }
+        .timeline-content { background: white; padding: 25px 20px; border-radius: 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); width: 100%; box-sizing: border-box; position: relative; }
+        .timeline-content::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 15px; height: 15px; background: white; border-top: 1px solid var(--border); border-left: 1px solid var(--border); transition: 0.4s; }
+        .timeline-item:hover .timeline-content { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--portal-green); }
+        .timeline-item:hover .timeline-content::before { border-color: var(--portal-green); }
+        .timeline-content h4 { margin: 0 0 12px 0; color: var(--primary); font-size: 1.1rem; }
+        .timeline-content p { margin: 0; font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
 
         /* ========================================================= */
         /* 📝 今日任务清单 (Todo List) */
         /* ========================================================= */
-        .home-content-wrapper {
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            gap: 40px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .timeline-container {
-            flex: 3;
-        }
-
-        .todo-container {
-            flex: 1;
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border);
-            padding: 30px;
-            height: fit-content;
-            position: sticky;
-            top: 90px;
-        }
-
-        .todo-header {
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-            .todo-header h3 {
-                color: var(--primary);
-                font-size: 1.3rem;
-                margin-bottom: 8px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-            }
-
-            .todo-header p {
-                color: var(--text-light);
-                font-size: 0.9rem;
-            }
-
-        .todo-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .todo-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--border);
-            transition: 0.3s;
-        }
-
-            .todo-item:hover {
-                background: var(--bg-main);
-            }
-
-            .todo-item:last-child {
-                border-bottom: none;
-            }
-
-        .todo-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--portal-green);
-            border-radius: 50%;
-            margin-right: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
-
-            .todo-checkbox:hover {
-                background: rgba(52,211,153,0.1);
-            }
-
-            .todo-checkbox.checked {
-                background: var(--portal-green);
-                border-color: var(--portal-green);
-            }
-
-                .todo-checkbox.checked::after {
-                    content: '✓';
-                    color: white;
-                    font-size: 12px;
-                    font-weight: bold;
-                }
-
-        .todo-text {
-            flex: 1;
-            font-size: 0.95rem;
-            color: #334155;
-            transition: 0.3s;
-        }
-
-            .todo-text.completed {
-                text-decoration: line-through;
-                color: var(--text-light);
-            }
-
-        .todo-add-form {
-            margin-top: 25px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .todo-input {
-            flex: 1;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-            .todo-input:focus {
-                border-color: var(--portal-green);
-                box-shadow: 0 0 0 3px rgba(52,211,153,0.1);
-            }
-
-        .todo-add-btn {
-            background: var(--portal-green);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-            .todo-add-btn:hover {
-                background: var(--accent);
-                transform: translateY(-1px);
-            }
+        .home-content-wrapper { display: flex; max-width: 1200px; margin: 0 auto; padding: 0 20px; gap: 40px; width: 100%; box-sizing: border-box; }
+        .timeline-container { flex: 3; }
+        .todo-container { flex: 1; background: white; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border); padding: 30px; height: fit-content; position: sticky; top: 90px; }
+        .todo-header { margin-bottom: 25px; text-align: center; }
+        .todo-header h3 { color: var(--primary); font-size: 1.3rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .todo-header p { color: var(--text-light); font-size: 0.9rem; }
+        .todo-list { list-style: none; padding: 0; margin: 0; }
+        .todo-item { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid var(--border); transition: 0.3s; }
+        .todo-item:hover { background: var(--bg-main); }
+        .todo-item:last-child { border-bottom: none; }
+        .todo-checkbox { width: 20px; height: 20px; border: 2px solid var(--portal-green); border-radius: 50%; margin-right: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .todo-checkbox:hover { background: rgba(52,211,153,0.1); }
+        .todo-checkbox.checked { background: var(--portal-green); border-color: var(--portal-green); }
+        .todo-checkbox.checked::after { content: '✓'; color: white; font-size: 12px; font-weight: bold; }
+        .todo-text { flex: 1; font-size: 0.95rem; color: #334155; transition: 0.3s; }
+        .todo-text.completed { text-decoration: line-through; color: var(--text-light); }
+        .todo-add-form { margin-top: 25px; display: flex; gap: 8px; }
+        .todo-input { flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; outline: none; transition: 0.3s; }
+        .todo-input:focus { border-color: var(--portal-green); box-shadow: 0 0 0 3px rgba(52,211,153,0.1); }
+        .todo-add-btn { background: var(--portal-green); color: white; border: none; border-radius: 8px; padding: 0 15px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .todo-add-btn:hover { background: var(--accent); transform: translateY(-1px); }
 
         /* ========================================================= */
         /* 📅 农事作业日历模块 */
         /* ========================================================= */
-        .calendar-section {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-            box-sizing: border-box;
-            z-index: 10;
-        }
-
-        .calendar-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-            .calendar-header h2 {
-                color: var(--primary);
-                font-size: 2rem;
-                margin-bottom: 10px;
-            }
-
-        .calendar-wrapper {
-            display: flex;
-            gap: 30px;
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border);
-        }
-
-        .calendar-main {
-            flex: 2;
-        }
-
-        .calendar-sidebar {
-            flex: 1.2;
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 25px;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            height: 400px; 
-        }
-
-        .cal-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .cal-btn {
-            background: white;
-            border: 1px solid var(--border);
-            padding: 6px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: bold;
-            color: var(--text-light);
-            box-shadow: var(--shadow-sm);
-        }
-
-            .cal-btn:hover {
-                border-color: var(--portal-green);
-                color: var(--portal-green);
-                transform: translateY(-2px);
-            }
-
-        .cal-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .cal-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-        }
-
-        .cal-weekday {
-            text-align: center;
-            font-weight: bold;
-            color: var(--text-light);
-            font-size: 0.95rem;
-            padding-bottom: 10px;
-        }
-
-        .cal-day {
-            aspect-ratio: 1/1.5;
-            border: 1px solid #f1f5f9;
-            border-radius: 10px;
-            padding: 8px 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            background: #fafafa;
-        }
-
-        .cal-date {
-            align-self: center;
-            margin-bottom: 4px;
-        }
-
-        .cal-day.other-month {
-            opacity: 0.3;
-            cursor: default;
-            background: white;
-        }
-
-        .cal-day:hover:not(.other-month) {
-            border-color: var(--portal-green);
-            background: #f0fdf4;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(52,211,153,0.15);
-        }
-
-        .cal-day.active {
-            border-color: var(--portal-green);
-            background: #ecfdf5;
-            box-shadow: 0 0 0 2px rgba(52,211,153,0.3);
-        }
-
-        .cal-date {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #334155;
-            margin-bottom: 8px;
-            transition: 0.3s;
-        }
-
-        .cal-day.today .cal-date {
-            background: var(--portal-green);
-            color: white;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(52,211,153,0.4);
-        }
-
-        .cal-dots {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            justify-content: center;
-            height: 14px; 
-        }
-
-        .cal-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
-
-        .cal-tasks {
-            margin-top: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            max-height: 60px;
-            overflow: hidden;
-        }
-
-        .cal-task-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.7rem;
-            line-height: 1.2;
-        }
-
-        .cal-task-title {
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: var(--text);
-        }
-
-        .task-list {
-            margin-top: 20px;
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
-
-            /* 自定义滚动条 */
-            .task-list::-webkit-scrollbar {
-                width: 6px;
-            }
-            .task-list::-webkit-scrollbar-track {
-                background: transparent;
-            }
-            .task-list::-webkit-scrollbar-thumb {
-                background: #cbd5e1;
-                border-radius: 3px;
-            }
-
-        /* ========================================================= */
-        /* ☁️ 气象状况板块 */
-        /* ========================================================= */
-        .weather-section {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-            box-sizing: border-box;
-            z-index: 10;
-        }
-
-        .weather-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-            .weather-header h2 {
-                color: var(--primary);
-                font-size: 2rem;
-                margin-bottom: 10px;
-            }
-
-            .weather-header p {
-                color: var(--text-light);
-                font-size: 1rem;
-            }
-
-        .weather-wrapper {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border);
-        }
-
-        .weather-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .location-selector {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-            .location-selector label {
-                font-weight: bold;
-                color: var(--primary);
-            }
-
-            .location-selector select {
-                padding: 8px 12px;
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                background: white;
-                font-size: 0.95rem;
-                cursor: pointer;
-            }
-
-        .weather-tabs {
-            display: flex;
-            gap: 10px;
-        }
-
-        .weather-tab {
-            padding: 8px 20px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: white;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: bold;
-            color: var(--text-light);
-        }
-
-            .weather-tab:hover {
-                border-color: var(--portal-green);
-                color: var(--portal-green);
-            }
-
-            .weather-tab.active {
-                background: var(--portal-green);
-                color: white;
-                border-color: var(--portal-green);
-            }
-
-        .weather-content {
-            margin-top: 20px;
-        }
-
-        .weather-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .weather-card {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px 15px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-            .weather-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 15px rgba(0,0,0,0.05);
-                border-color: var(--portal-green);
-            }
-
-        .weather-date {
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .weather-icon {
-            font-size: 2.5rem;
-            margin: 10px 0;
-        }
-
-        .weather-temp {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #334155;
-            margin-bottom: 5px;
-        }
-
-        .weather-desc {
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        .weather-loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-light);
-        }
-
-        .weather-detail {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-            .weather-detail small {
-                font-size: 0.75rem;
-                color: var(--text-light);
-            }
-
-        .weather-loading::after {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-top: 2px solid var(--portal-green);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* 气象模态框样式 */
-        .weather-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .weather-modal-content {
-            background-color: #fff;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 1000px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .weather-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--primary-light);
-        }
-
-            .weather-modal-header h2 {
-                margin: 0;
-                color: var(--primary);
-            }
-
-        .weather-modal-close {
-            color: var(--text-light);
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-            .weather-modal-close:hover {
-                color: var(--primary);
-            }
-
-        .weather-modal-body {
-            padding: 10px 0;
-        }
-
-        /* 折线图样式 */
-        .weather-chart {
-            margin: 30px 0;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 20px 0;
-        }
-
-        .chart-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .temperature-chart {
-            background: linear-gradient(180deg, rgba(255, 165, 0, 0.1) 0%, rgba(255, 165, 0, 0) 100%);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .humidity-chart {
-            background: linear-gradient(180deg, rgba(135, 206, 250, 0.1) 0%, rgba(135, 206, 250, 0) 100%);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .wind-chart {
-            background: linear-gradient(180deg, rgba(144, 238, 144, 0.1) 0%, rgba(144, 238, 144, 0) 100%);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-        }
+        .calendar-section { width: 100%; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; box-sizing: border-box; z-index: 10; }
+        .calendar-header { text-align: center; margin-bottom: 40px; }
+        .calendar-header h2 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
+        .calendar-wrapper { display: flex; gap: 30px; background: white; padding: 30px; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
+        .calendar-main { flex: 2; }
+        .calendar-sidebar { flex: 1.2; background: #f8fafc; border-radius: 12px; padding: 25px; border: 1px solid var(--border); display: flex; flex-direction: column; height: 400px; }
+        .cal-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .cal-btn { background: white; border: 1px solid var(--border); padding: 6px 18px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold; color: var(--text-light); box-shadow: var(--shadow-sm); }
+        .cal-btn:hover { border-color: var(--portal-green); color: var(--portal-green); transform: translateY(-2px); }
+        .cal-title { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+        .cal-weekday { text-align: center; font-weight: bold; color: var(--text-light); font-size: 0.95rem; padding-bottom: 10px; }
+        .cal-day { aspect-ratio: 1/1.5; border: 1px solid #f1f5f9; border-radius: 10px; padding: 8px 5px; cursor: pointer; transition: 0.3s; position: relative; display: flex; flex-direction: column; align-items: flex-start; background: #fafafa; }
+        .cal-date { align-self: center; margin-bottom: 4px; }
+        .cal-day.other-month { opacity: 0.3; cursor: default; background: white; }
+        .cal-day:hover:not(.other-month) { border-color: var(--portal-green); background: #f0fdf4; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(52,211,153,0.15); }
+        .cal-day.active { border-color: var(--portal-green); background: #ecfdf5; box-shadow: 0 0 0 2px rgba(52,211,153,0.3); }
+        .cal-date { font-weight: bold; font-size: 1.1rem; color: #334155; margin-bottom: 8px; transition: 0.3s; }
+        .cal-day.today .cal-date { background: var(--portal-green); color: white; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 2px 8px rgba(52,211,153,0.4); }
+        .cal-dots { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; height: 14px; }
+        .cal-dot { width: 6px; height: 6px; border-radius: 50%; }
+        .cal-tasks { margin-top: 4px; display: flex; flex-direction: column; gap: 2px; max-height: 60px; overflow: hidden; }
+        .cal-task-item { display: flex; align-items: center; gap: 4px; font-size: 0.7rem; line-height: 1.2; }
+        .cal-task-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+        .task-list { margin-top: 20px; flex: 1; overflow-y: auto; padding-right: 5px; }
+        .task-list::-webkit-scrollbar { width: 6px; }
+        .task-list::-webkit-scrollbar-track { background: transparent; }
+        .task-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     </style>
 </head>
 
 <body>
-
     <header class="global-header">
         <div class="header-logo" onclick="switchView('home')">🌿 棉田数智管控生态</div>
         <div class="header-nav">
@@ -1868,8 +519,6 @@
             </div>
             <div class="nav-item" id="nav-dashboard" onclick="requireAuth('dashboard')">全域态势大屏</div>
             <div class="nav-item" id="nav-agent" onclick="requireAuth('agent')">AI 农技智能体</div>
-            <div class="nav-item" id="nav-weather" onclick="switchView('weather')">气象状况监测</div>
-            <div class="nav-item" id="nav-wiki" onclick="switchView('wiki')">农技百科手册</div>
         </div>
         <div class="header-actions">
             <button id="btn-show-login" class="btn-login" onclick="openLoginModal('monitor')">农户登录</button>
@@ -1905,18 +554,6 @@
                     <div class="f-title">AI 农技智能体</div>
                     <div class="f-desc">7x24小时在线的新疆棉花老专家，随时解答打药配比、天气影响与农事疑问。</div>
                     <button class="f-btn" style="color:var(--text-light); border-color:var(--text-light);" onclick="requireAuth('agent')">开启对话</button>
-                </div>
-                <div class="feature-card" style="border-top: 4px solid #3b82f6;">
-                    <div class="f-icon">⛅</div>
-                    <div class="f-title">全天候气象感知</div>
-                    <div class="f-desc">实时同步产区气象卫星数据，精准监测温湿度与风速变动，智能推送灾害预警并指导最佳施药与农事实操时机。</div>
-                    <button class="f-btn" style="color:#3b82f6; border-color:#3b82f6;" onclick="switchView('weather')">查看实况</button>
-                </div>
-                <div class="feature-card" style="border-top: 4px solid var(--success);">
-                    <div class="f-icon">📚</div>
-                    <div class="f-title">农技百科手册</div>
-                    <div class="f-desc">集成新疆系列品种说明与兵团标准植保问答，提供最权威的棉花栽培与病虫害防治指南。</div>
-                    <button class="f-btn" style="color:var(--success); border-color:var(--success);" onclick="switchView('wiki')">查阅百科</button>
                 </div>
             </div>
 
@@ -1985,26 +622,11 @@
                         <p>完成后点击圆形复选框打钩</p>
                     </div>
                     <ul class="todo-list" id="todoList">
-                        <li class="todo-item">
-                            <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
-                            <span class="todo-text">晨间无人机巡视采集数据</span>
-                        </li>
-                        <li class="todo-item">
-                            <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
-                            <span class="todo-text">上传重点地块影像进行AI诊断</span>
-                        </li>
-                        <li class="todo-item">
-                            <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
-                            <span class="todo-text">根据AI建议调整水肥灌溉</span>
-                        </li>
-                        <li class="todo-item">
-                            <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
-                            <span class="todo-text">查看夜间风险评估报告</span>
-                        </li>
-                        <li class="todo-item">
-                            <div class="todo-checkbox" onclick="toggleTodo(this)"></div>
-                            <span class="todo-text">准备次日作业计划</span>
-                        </li>
+                        <li class="todo-item"><div class="todo-checkbox" onclick="toggleTodo(this)"></div><span class="todo-text">晨间无人机巡视采集数据</span></li>
+                        <li class="todo-item"><div class="todo-checkbox" onclick="toggleTodo(this)"></div><span class="todo-text">上传重点地块影像进行AI诊断</span></li>
+                        <li class="todo-item"><div class="todo-checkbox" onclick="toggleTodo(this)"></div><span class="todo-text">根据AI建议调整水肥灌溉</span></li>
+                        <li class="todo-item"><div class="todo-checkbox" onclick="toggleTodo(this)"></div><span class="todo-text">查看夜间风险评估报告</span></li>
+                        <li class="todo-item"><div class="todo-checkbox" onclick="toggleTodo(this)"></div><span class="todo-text">准备次日作业计划</span></li>
                     </ul>
                     <form class="todo-add-form" onsubmit="addTodo(event)">
                         <input type="text" class="todo-input" id="todoInput" placeholder="添加新任务..." required>
@@ -2025,8 +647,7 @@
                             <div class="cal-title" id="calTitle">2026年4月</div>
                             <button class="cal-btn" onclick="changeMonth(1)">下个月 →</button>
                         </div>
-                        <div class="cal-grid" id="calGrid">
-                            </div>
+                        <div class="cal-grid" id="calGrid"></div>
                     </div>
                     <div class="calendar-sidebar">
                         <h3 style="margin:0 0 15px 0; color:var(--primary); font-size:1.1rem;">当日作业安排</h3>
@@ -2040,14 +661,9 @@
 
             <footer class="portal-footer">
                 <div class="footer-links">
-                    <a href="#">关于我们</a>
-                    <a href="#">农场主服务协议</a>
-                    <a href="#">隐私政策</a>
-                    <a href="#">联系支持</a>
+                    <a href="#">关于我们</a> <a href="#">农场主服务协议</a> <a href="#">隐私政策</a> <a href="#">联系支持</a>
                 </div>
-                <div class="footer-copy">
-                    &copy; 2026 新疆棉花数智化防控决策平台. 保留所有权利。 | 新ICP备20261108号-1
-                </div>
+                <div class="footer-copy">&copy; 2026 新疆棉花数智化防控决策平台. 保留所有权利。 | 新ICP备20261108号-1</div>
             </footer>
 
             <div id="timelineEditModal" class="modal">
@@ -2058,52 +674,13 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="editTimelineIndex">
-                        <div class="form-group">
-                            <label for="editTimelineTime">时间段：</label>
-                            <input type="text" id="editTimelineTime" placeholder="例如：07:00 - 09:00">
-                        </div>
-                        <div class="form-group">
-                            <label for="editTimelineTitle">任务标题：</label>
-                            <input type="text" id="editTimelineTitle" placeholder="输入任务标题">
-                        </div>
-                        <div class="form-group">
-                            <label for="editTimelineDesc">任务描述：</label>
-                            <textarea id="editTimelineDesc" placeholder="输入任务详细描述" rows="4"></textarea>
-                        </div>
+                        <div class="form-group"><label for="editTimelineTime">时间段：</label><input type="text" id="editTimelineTime" placeholder="例如：07:00 - 09:00"></div>
+                        <div class="form-group"><label for="editTimelineTitle">任务标题：</label><input type="text" id="editTimelineTitle" placeholder="输入任务标题"></div>
+                        <div class="form-group"><label for="editTimelineDesc">任务描述：</label><textarea id="editTimelineDesc" placeholder="输入任务详细描述" rows="4"></textarea></div>
                     </div>
                     <div class="modal-footer">
                         <button class="cancel-btn" onclick="closeTimelineModal()">取消</button>
                         <button class="save-btn" onclick="saveTimelineItem()">保存</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-weather" class="view-section">
-            <div class="weather-section">
-                <div class="weather-header">
-                    <h2>☁️ 气象状况监测</h2>
-                    <p>实时天气数据与未来趋势分析，为农事决策提供科学依据</p>
-                </div>
-                <div class="weather-wrapper">
-                    <div class="weather-controls">
-                        <div class="location-selector">
-                            <label for="locationSelect">选择地区：</label>
-                            <select id="locationSelect" onchange="changeLocation()">
-                                <option value="shihezi">石河子</option>
-                                <option value="wusu">乌苏</option>
-                                <option value="kuqa">库车</option>
-                                <option value="korla">库尔勒</option>
-                                <option value="alashan">阿拉尔</option>
-                            </select>
-                        </div>
-                        <div class="weather-tabs">
-                            <div class="weather-tab active" onclick="switchWeatherTab('forecast')">未来15日</div>
-                            <div class="weather-tab" onclick="switchWeatherTab('history')">前一周</div>
-                        </div>
-                    </div>
-                    <div class="weather-content" id="weatherContent">
-                        <div class="weather-loading">正在加载天气数据</div>
                     </div>
                 </div>
             </div>
@@ -2129,9 +706,7 @@
                     </div>
 
                     <div id="pending-alert-banner" style="display:none; background: linear-gradient(to right, #fffbeb, #ffffff); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: var(--shadow-sm);">
-                        <div style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: #b45309; margin-bottom: 8px; font-size: 1rem;">
-                            ⚠️ 存在待复检任务！
-                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: #b45309; margin-bottom: 8px; font-size: 1rem;">⚠️ 存在待复检任务！</div>
                         <div style="color: #475569; font-size: 0.9rem; line-height: 1.5;">
                             上次检测发现 <strong id="lbl-prev-pest" style="color: var(--danger); font-size: 1.1em;">0</strong> 处异常，已采取【<span id="lbl-prev-op" style="font-weight:bold; color:var(--primary);"></span>】。<br>
                             <span style="color:#64748b; font-size:0.85rem;">请上传今日影像，系统将自动评估防治效果并闭环。</span>
@@ -2146,8 +721,7 @@
                     </div>
 
                     <div style="font-weight:bold; margin:15px 0 10px 0; font-size:0.9rem; color:var(--primary);">边缘节点传感器：</div>
-                    <div id="sensorGallery" class="sensor-gallery">
-                    </div>
+                    <div id="sensorGallery" class="sensor-gallery"></div>
 
                     <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">🚁 上传巡查影像 | 边缘AI实时诊断</div>
                     <img id="previewImage" class="preview-img">
@@ -2165,7 +739,6 @@
                     <div id="actionButtonGroup" style="display:none;">
                         <button class="btn-primary" onclick="openRecordModal()">💾 归档本次检测与最终方案</button>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -2208,98 +781,6 @@
                 </div>
             </div>
         </section>
-
-        <section id="view-wiki" class="view-section">
-            <div style="display: flex; gap: 25px; align-items: flex-start; max-width: 1400px; margin: 0 auto; padding: 20px; height: calc(100vh - 120px); overflow: hidden;">
-                <div style="flex: 1; height: 100%; overflow-y: auto; padding-right: 15px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--portal-green); padding-bottom:15px; margin-bottom:20px;">
-                        <h2 style="margin:0; color:var(--primary);">📚 农技知识百科</h2>
-                        <div style="display: flex; gap: 8px; align-items: center;">
-                            <button class="btn" onclick="openWikiModal()" style="background: var(--portal-green); border-color: var(--portal-green);">+ 添加知识</button>
-                            <div id="wiki-filters" style="display: flex; gap: 8px;">
-                                <button class="btn-outline" onclick="filterWiki('all')" style="border-color: var(--portal-green); color: var(--portal-green);">全部</button>
-                                <button class="btn-outline" onclick="filterWiki('variety')">品种</button>
-                                <button class="btn-outline" onclick="filterWiki('planting')">播种</button>
-                                <button class="btn-outline" onclick="filterWiki('pest')">病虫</button>
-                                <button class="btn-outline" onclick="filterWiki('management')">水肥</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="wikiGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:20px; padding-bottom: 40px;">
-                    </div>
-                </div>
-
-                <div style="width: 350px; background: white; border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; height: 100%; box-shadow: var(--shadow-md); overflow: hidden;">
-                    <div style="padding: 15px; background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); border-bottom: 1px solid var(--border);">
-                        <h3 style="margin:0; color:var(--primary); font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
-                            <span>👨‍🌾</span> 种植心得社区
-                        </h3>
-                        <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: var(--text-light);">石河子、玛纳斯农户互动中</p>
-                    </div>
-                    <div id="community-list" style="flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 12px; background: #fafafa;">
-                    </div>
-                    <div style="padding: 15px; background: white;">
-                        <textarea id="community-input" placeholder="分享您的种植心得..." style="width: 100%; height: 70px; border-radius: 8px; border: 1px solid var(--border); padding: 10px; resize: none; font-family: inherit; font-size: 0.85rem; margin-bottom: 10px; box-sizing: border-box; outline: none;"></textarea>
-                        <button class="btn-primary" onclick="postToCommunity()" style="background: var(--portal-green); width: 100%; border-radius: 6px;">发布心得</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div id="wiki-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-            <div style="background: white; border-radius: 12px; padding: 20px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 id="modal-title">添加知识卡片</h3>
-                    <button onclick="closeWikiModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-                </div>
-                <form id="wiki-form">
-                    <input type="hidden" id="wiki-id" value="">
-                    <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">分类</label>
-                        <select id="wiki-category" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
-                            <option value="variety">品种特性</option>
-                            <option value="planting">播种苗期</option>
-                            <option value="pest">病虫害防治</option>
-                            <option value="management">水肥调控</option>
-                        </select>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">标题</label>
-                        <input type="text" id="wiki-title" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;" required>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">内容</label>
-                        <textarea id="wiki-content" rows="4" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;" required></textarea>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">来源</label>
-                        <input type="text" id="wiki-source" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;" required>
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">图片链接</label>
-                        <input type="url" id="wiki-image" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px;" placeholder="https://example.com/image.jpg">
-                    </div>
-                    <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                        <button type="button" onclick="closeWikiModal()" class="btn-outline">取消</button>
-                        <button type="submit" class="btn">保存</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div id="wiki-detail-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-            <div style="background: white; border-radius: 12px; padding: 20px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 id="detail-title">知识卡片详情</h3>
-                    <button onclick="closeWikiDetailModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-                </div>
-                <div id="detail-content">
-                    </div>
-                <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                    <button onclick="closeWikiDetailModal()" class="btn">关闭</button>
-                </div>
-            </div>
-        </div>
     </main>
 
     <div id="login-modal">
@@ -2340,78 +821,14 @@
     <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
 
     <script>
-        // 传感器图片池
         const SENSOR_IMAGE_POOL = [
             'test1.jpg', 'test2.jpg', 'test3.jpg', 'test4.jpg', 'test5.jpg',
             'test6.jpg', 'test7.jpg', 'test8.jpg', 'test9.jpg', 'test10.jpg'
         ];
 
-        // 1. 知识库数据
-        let wikiData = [
-            // (此处保留原有的 wikiData 数据以节省篇幅，原代码未发生改变)
-            { category: 'variety', title: '次宜棉区熟期定位', content: '昌吉州地处新疆次宜棉区，初霜期较早，热量资源有限。这要求品种必须具备极强的早熟性，生育期需严格控制在120天以内。若熟期过晚，棉铃在霜前无法充分吐絮，会导致纤维成熟度不足，严重影响产量和纤维品质。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '一主两辅布局原则', content: '为降低引种风险并实现区域棉花品质的一致性，昌吉州实施"一主两辅"品种策略。由当地农业局推荐一个主导品种和两个辅助品种。这种集中化管理有助于实现标准化种植、机械化采收及统一加工，提升昌吉棉花的整体竞争力。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '种子纯度与合规标准', content: '棉种质量是"一播全苗"的源头保障。要求种子纯度不低于95%，发芽率达到85%以上。所有引用品种必须经过国家或自治区级品种审定委员会审定。严禁种植非法或种性不明的品种，以防种性退化或抗性丧失带来的生产损失。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '耐寒性与抗逆能力', content: '昌吉州春季气温波动剧烈，且常伴有倒春寒。早熟品种必须具备优良的低温耐受力，以应对播种后的寒冷天气。高抗逆性确保了种子在低温胁迫下仍能正常萌发，减少烂种风险，是实现春季早发、提早入伏的关键生理基础。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '抗枯黄萎病特性', content: '针对棉花的主要癌症——枯萎病和黄萎病，品种选择必须具备高抗或中抗水平。特别是在重病地块，选种不仅关系到单产，更关系到植株的存活率。抗病品种的推广能显著减少生长期的药剂投入，保障生态安全。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '株型紧凑与机采适配', content: '现代化种植要求品种具备适配机械采收的物理特性。理想的机采品种应株型紧凑、果枝起始节位较高且分布均匀，植株高度一致。铃壳开张度需适中，既能保证吐絮顺畅，又能有效防止风吹落棉，确保机采效率和采净率。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '纤维品质核心指标', content: '优质品种不仅追求产量，更看重纤维的强力和长度。昌吉州优选品种旨在使纤维长度和强度达到甚至超过国家标准。通过遗传改良提升纤维的整齐度，满足高支纱纺织工业对高端原料的苛刻需求，从而提升农户的溢价能力。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '丰产潜力与收获构成', content: '品种应具备单株铃数多、铃重大的高产构效。在昌吉州推荐的种植密度下，品种需展现出良好的群体稳定性，在大规模种植中依然能保持稳定的平均铃重。通过高频次的品种对比试验，确保入选品种在当地环境下具有卓越的增产潜力。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '脱叶剂敏感性', content: '机采棉需要在采前大规模喷洒脱叶催熟剂。优选品种应对脱叶剂表现出良好的敏感性，确保在规定时间内叶片干枯脱落且不产生次生生长。高度的脱叶配合性不仅降低了皮棉含杂率，还为采棉机进田提供了最佳视野和作业条件。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '种子活力与顶土力', content: '昌吉部分棉田为重粘土或盐碱地，这要求品种种子具备极强的发芽势和顶土力。高活力的种子在破土过程中能有效抵御地膜覆盖下的微环境压力。即使在整地质量略有波动的情况下，强顶土力仍能确保出苗的整齐度，奠定丰产苗架。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '抗倒伏能力', content: '高密度种植下，植株的抗倒伏性能至关重要。优选品种茎秆强度高、重心稳，能承受生长后期沉重的铃果负荷及强风侵袭。抗倒伏不仅保证了植株的光合效能，更是机械化无损采收的重要前提，减少了因倒伏导致的机采漏收。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '早熟品种的产量稳定性', content: '昌吉早熟品种的稳定性体现在其对环境变迁的低敏感度。在遭遇后期低温或连阴雨天气时，早熟性强的品种由于发育进程提前，受灾程度远小于中晚熟品种。这种抗波动能力保证了农户在极端天气年份仍能获得预期收益，降低了整体经营风险。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'variety', title: '适应性广度考核', content: '通过多点分布试验，考核品种对昌吉州不同类型棉区的普适性。无论是针对沙性较强的壤土，还是针对含盐量较高的地块，主导品种都应展现出较好的生长协调性。广适性品种的推广降低了品种管理的复杂度，利于大面积技术统筹。', source: '品种说明', image: '棉花图片.png' },
-            { category: 'planting', title: '春季破雪提墒', content: '针对积雪深厚地块，在气温-10℃时利用缺口耙进行破雪，加速融化并延长土壤冻融时间。这一技术增加了土壤风化层厚度，通过人工干预提早排水散墒，解决了红粘土和低洼积水地块因水分过高导致的"早播难"顽疾。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '六字整地标准', content: '播前整地必须达到"墒、平、松、碎、挣、齐"的要求。土壤需松碎而不失墒，地面平整度高以确保铺膜紧实。全田需彻底清除地表残膜、棉茬和草根，为机械化精准播种和地膜的保温效果创造洁净的苗床环境。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '黏性土壤宜耕期掌握', content: '昌吉州重粘土地块整地时，必须严格掌握宜耕期。水分过大易造成土壤板结，水分过小则土块难以粉碎。在"宜耕"状态下作业可确保上层虚、下层实，既有利于棉种与土壤的紧密接触，又保证了根系向下深扎所需的通透空间。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: 'GPS卫星导航精准播种', content: '利用北斗或GPS卫星定位导航仪，实现自动铺膜、播种、覆土的一体化作业。该技术能保证播行端直、行距一致、接茬准确，使一穴一粒率超过95%，空穴率和错位率均降至2%以内。高精度播种是提升机采效率和标准化管理的基石。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '播种适期科学判定', content: '标准为5厘米地温稳定在12-14℃或气温达到16℃以上。昌吉州通常建议避开降雨天气，严防播后板结。干播湿出地块适宜播期为4月8-20日，适墒地块可在4月15日后播种，目标是确保在4月底前出全苗。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '深不过寸深度规范', content: '棉籽播种深度应严格控制在2-3厘米。深度超过1寸（约3.3厘米）会导致幼芽顶土困难，养分耗尽后烂种；过浅则易受干旱脱墒影响。精准的播深控制能使种子处于最稳定的湿度和温度层，是昌吉州实现"一播全苗"的核心规范。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '覆土厚度与宽度调控', content: '覆土宽度要求5-6厘米，厚度0.5-1.5厘米。覆土必须均匀覆盖种穴，起到固定地膜和保持穴位湿度的作用，防止膜下水分快速散失。良好的覆土管理不仅利于棉种破土，还能防止膜面被强风掀起，对保墒增温至关重要。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '优质地膜保墒控盐', content: '昌吉州强调地膜厚度需达到0.01mm以上。厚膜耐破性强，能更有效地抑制地表蒸发和盐分向穴位积聚。高质量覆膜能提高地温2-3℃，显著缩短种子萌发期，对预防苗期病害和实现提早现蕾具有关键意义。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '雨后破除板结技术', content: '棉花播种后若遇雨，覆土极易形成坚硬板块，阻碍幼苗出土。农户需在雨后及时中耕或人工划破板结层。若覆土过厚，可适当扒土减压，但需保留少量湿土覆盖幼苗头部，避免阳光直射造成幼嫩组织灼伤。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '干播湿出滴水管理', content: '在极度干旱地块，采用干播后滴水诱发萌发的技术。滴水量需精准控制，确保水滴能渗入种穴形成湿润带，又不至于因水量过大降低地温。科学的滴水时机选择应结合气象信息，避开大幅降温前夕，以保障苗齐苗壮。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '轻镇压提墒关键操作', content: '针对墒情不足的棉田，昌吉州推荐在幼苗出土前进行轻镇压作业。通过物理压实，增加土壤微粒与棉籽的接触面积，促进深层水分向发芽层传导。此举能有效解决因整地虚空导致的脱墒烂种问题，提高种子的吸水发芽效率。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'planting', title: '苗期中耕松土增温', content: '出苗后及时中耕，中耕器必须加装碎土轮。中耕能切断表层毛细管，阻止深层水分散失，同时能增加土壤含氧量并提升白天地温。这对于促进棉苗根系向下发育、实现早发齐苗以及增强植株的抗逆性具有显著作用。', source: '农技问答', image: '棉花播种图片.png' },
-            { category: 'pest', title: '药剂拌种与种子包衣', content: '播种前必须使用药剂进行处理，推荐使用福多甲或卫福等包衣剂。药剂需按种子重量0.3%的比例兑水均匀拌种。这种预防性措施能在种子周围形成保护圈，有效杀灭土壤和种子表面的病原菌，防治立枯病、炭疽病及地下害虫。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '枯萎病与黄萎病监控', content: '作为棉花的毁灭性病害，昌吉州通过选育高抗品种作为防治主攻方向。在病害高发期，通过科学轮作减少连作压力，并结合中耕提高土壤通透性以抑制病菌繁殖。对于已发病植株，需及时清理或局部处理，防止随灌溉水大面积蔓延。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '智能化病虫害预警', content: '昌吉州推广基于大数据和传感器的智能化监控系统，实时采集田间温湿度及害虫种群动态。系统能根据历史数据精准预测蚜虫、棉铃虫的发病高峰期，变"被动灭除"为"主动预防"。精准的预警极大地降低了防治成本，提高了用药效能。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '生物防治技术的应用', content: '大力推广生物防治手段，如在棉田释放赤眼蜂防治棉铃虫，利用瓢虫控制蚜虫基数。推广喷施BT（苏云金杆菌）等微生物杀虫剂，这些措施在保护天敌的同时，能有效降低化学农药的残留，提升昌吉棉花的生态品质。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '物理防治与生态防控', content: '利用害虫的趋性，在田间大规模悬挂黄色粘虫板、安装频振式诱虫灯，诱杀蚜虫和螟蛾类害虫。结合棉田周边的防护林建设，构建多层级的生态屏障，减少外来害虫的入侵几率。物理防治手段的叠加使用，显著压低了田间的初始虫源基数。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '科学用药与精准施药', content: '昌吉州强调"预防为主，综合防治"的植保方针。在必须用药时，优先选用高效、低毒、低残留的农药品种。通过精准的病虫害监测，确定最佳施药时机和剂量，避免盲目施药。推广使用无人机等现代施药设备，提高施药均匀性和覆盖率。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '棉铃虫综合防治策略', content: '棉铃虫是棉花的主要害虫之一，防治需采取"压前控后"策略。前期通过种植诱集作物、释放赤眼蜂等生物手段压低虫口基数；后期根据虫情监测，在卵高峰期和幼虫低龄期精准用药。严禁使用高毒高残留农药，保护天敌资源。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '蚜虫监测与防控要点', content: '棉蚜繁殖速度快，易爆发成灾。建立定点定期监测制度，当百株蚜量达到防治指标时及时采取措施。优先选用内吸性杀虫剂，注意轮换用药以延缓抗药性产生。保护利用瓢虫、草蛉等天敌，维持田间生态平衡。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '红蜘蛛早期识别与防治', content: '红蜘蛛在高温干旱条件下易爆发，且抗药性强。加强田间巡查，重点观察叶背，发现点片发生时立即进行"挑治"。选用专用杀螨剂，注意不同作用机制药剂的轮换使用。保持田间适当湿度，创造不利于红蜘蛛繁殖的环境条件。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '地下害虫土壤处理技术', content: '针对地老虎、金针虫等地下害虫，采取土壤处理和种子包衣相结合的策略。播种前可用辛硫磷等药剂进行土壤处理，或选用含有杀虫成分的种衣剂包衣。出苗后发现危害，可用毒饵或灌根方法进行补救防治。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '病害循环阻断措施', content: '对于土传病害，通过合理轮作、深翻晒垡、调节土壤pH值等措施，打破病害循环。重病田块可与小麦、玉米等禾本科作物轮作，减少土壤中病原菌积累。结合秋季深翻，将病残体翻入土壤深层，加速其分解。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '农药安全使用规范', content: '严格执行农药安全间隔期，确保棉花收获前农药残留不超标。施药人员需做好个人防护，避免中毒事故发生。废弃农药包装统一回收处理，防止污染环境。建立农药使用档案，实现可追溯管理。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'pest', title: '抗性治理与药剂轮换', content: '针对害虫抗药性问题，建立区域性抗性监测网络。根据监测结果，科学制定药剂轮换方案，避免长期单一使用同类药剂。推广使用新型高效低毒农药，延缓抗性发展速度。加强农户培训，提高科学用药意识。', source: '农技问答', image: '病虫害防治图片.png' },
-            { category: 'management', title: '测土配方施肥基础', content: '昌吉州推广测土配方施肥技术，根据土壤养分检测结果和棉花需肥规律，制定个性化施肥方案。通过"缺什么补什么、缺多少补多少"的精准施肥原则，提高肥料利用率，减少养分浪费和环境污染，实现节本增效。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '基肥深施技术要点', content: '基肥以有机肥为主，配合适量化肥。有机肥需充分腐熟，亩施用量不少于2000公斤。化肥中磷肥应全部作基肥深施，氮肥施用量占总量的30-40%。深施深度15-20厘米，确保肥料分布在根系密集层，提高吸收效率。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '追肥时期与比例分配', content: '棉花追肥遵循"轻施苗肥、稳施蕾肥、重施花铃肥、补施盖顶肥"的原则。苗期追肥占5%，蕾期占15-20%，花铃期占60%以上，后期根据长势补施。通过分期追肥，满足棉花不同生育期的养分需求，防止后期脱肥早衰。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '滴灌施肥水肥一体化', content: '推广滴灌水肥一体化技术，将肥料溶解后随水滴施。该技术能实现水肥同步供应，提高水肥利用率20%以上。根据棉花长势和土壤墒情，灵活调整滴灌施肥量和频次，实现精准化管理。注意肥料选择，防止滴头堵塞。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '氮肥调控与品质平衡', content: '氮肥是棉花产量形成的关键，但过量施用会导致徒长、贪青晚熟、纤维品质下降。昌吉州根据土壤供氮能力和目标产量，合理确定氮肥总量。在生育中后期适当控氮，促进养分向棉铃转运，提高铃重和纤维成熟度。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '磷钾肥协同增效', content: '磷肥能促进根系发育和开花结铃，钾肥能增强抗逆性和纤维品质。昌吉州土壤普遍缺磷少钾，需重视磷钾肥的施用。磷肥集中深施，钾肥分期施用。通过合理配施氮磷钾，实现养分平衡，提高肥料整体效益。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '微量元素补充技术', content: '针对昌吉州部分棉田缺硼、缺锌问题，在基肥或追肥中适量补充微量元素肥料。硼肥能促进花粉管伸长，提高成铃率；锌肥能促进生长素合成，防止僵苗。微量元素可采用叶面喷施方式，在关键时期快速补充。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '化控技术促壮防旺', content: '合理使用缩节胺等植物生长调节剂，调控棉花株型，防止旺长。化控遵循"少量多次、前轻后重"原则，根据长势灵活调整。通过化控使株高控制在适宜范围，果枝分布均匀，通风透光良好，为高产优质创造条件。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '打顶整枝时机把握', content: '打顶是棉花管理的关键环节，遵循"时到不等枝、枝到不等时"原则。昌吉州一般在7月上旬进行，保留8-10台果枝。打顶后及时整枝，去除无效蕾和赘芽，减少养分消耗，集中供应有效铃发育，提高成铃率和铃重。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '灌溉制度科学制定', content: '根据棉花不同生育期的需水规律，制定科学灌溉制度。苗期适当控水促根下扎，蕾期适量灌溉，花铃期需水量大应保证充分灌溉，后期适当控水促早熟。全生育期灌溉定额控制在300-350立方米/亩，提高水分利用效率。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '节水灌溉技术推广', content: '全面推广膜下滴灌技术，相比传统漫灌节水40%以上。采用高频次、小水量的灌溉方式，保持土壤湿润均匀。结合土壤墒情监测，实现精准灌溉。在干旱年份，通过节水灌溉技术保证棉花稳产。', source: '农技问答', image: '水肥调控图片.png' },
-            { category: 'management', title: '叶面喷肥防早衰', content: '在棉花生育中后期，针对可能出现的脱肥早衰现象，及时进行叶面喷肥。常用磷酸二氢钾、尿素等，浓度控制在0.5-1%。叶面喷肥能快速补充养分，延长叶片功能期，促进棉铃充实，提高产量和品质。', source: '农技问答', image: '水肥调控图片.png' }
-        ];
-
-        // 2. 社区心得数据
-        let communityPosts = JSON.parse(localStorage.getItem('public_community_posts')) || [
-            { user: "老王", content: "今年天山2号出苗很快，大家注意破板结！", time: "10分钟前" },
-            { user: "兵团小李", content: "请问大家今年什么时候准备打脱叶剂？", time: "1小时前" }
-        ];
-
-        // 用户认证相关变量
         let currentUser = null;
         let users = JSON.parse(localStorage.getItem('users')) || [];
 
-        // 检查登录状态
         function checkLoginStatus() {
             const savedUser = localStorage.getItem('currentUser');
             if (savedUser) {
@@ -2420,181 +837,12 @@
             }
         }
 
-        // 3. 渲染百科知识的函数
-        function renderWiki(filterCat = 'all') {
-            const grid = document.getElementById('wikiGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            const filtered = filterCat === 'all' ? wikiData : wikiData.filter(d => d.category === filterCat);
-
-            filtered.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.style = `
-                        background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column;
-                    `;
-
-                const originalIndex = wikiData.findIndex(wikiItem => wikiItem.title === item.title && wikiItem.content === item.content);
-                card.innerHTML = `
-                        <div style="position: relative; height: 160px; overflow: hidden;">
-                            <img src="${item.image || 'https://via.placeholder.com/400x200?text=Cotton'}"
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                            <span style="position: absolute; top: 10px; left: 10px; background: var(--portal-green); color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">
-                                ${getCatName(item.category)}
-                            </span>
-                        </div>
-                        <div style="padding: 15px; flex: 1; display: flex; flex-direction: column;">
-                            <h4 style="margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;">${item.title}</h4>
-                            <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5; margin-bottom: 12px; flex: 1;">
-                                ${item.content}
-                            </p>
-                            <div style="border-top: 1px solid #f1f5f9; padding-top: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #94a3b8;">
-                                <span>📖 ${item.source}</span>
-                                <div style="display: flex; gap: 5px;">
-                                    <button class="btn" style="padding: 2px 8px; font-size: 0.7rem;" onclick="viewWikiDetail(${originalIndex})">详情</button>
-                                    <button class="btn-outline" style="padding: 2px 8px; font-size: 0.7rem;" onclick="editWikiCard(${originalIndex})">编辑</button>
-                                    <button class="btn-outline" style="padding: 2px 8px; font-size: 0.7rem; color: #ef4444; border-color: #ef4444;" onclick="deleteWikiCard(${originalIndex})">删除</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                card.onmouseenter = () => card.style.transform = 'translateY(-5px)';
-                card.onmouseleave = () => card.style.transform = 'translateY(0)';
-                grid.appendChild(card);
-            });
-        }
-
-        function getCatName(cat) {
-            const map = { variety: '品种特性', planting: '播种苗期', pest: '病虫害防治', management: '水肥调控' };
-            return map[cat] || '通用';
-        }
-
-        let currentEditingIndex = -1;
-
-        function editWikiCard(index) {
-            currentEditingIndex = index;
-            const item = wikiData[index];
-            document.getElementById('modal-title').textContent = '编辑知识卡片';
-            document.getElementById('wiki-id').value = index;
-            document.getElementById('wiki-category').value = item.category;
-            document.getElementById('wiki-title').value = item.title;
-            document.getElementById('wiki-content').value = item.content;
-            document.getElementById('wiki-source').value = item.source;
-            document.getElementById('wiki-image').value = item.image || '';
-            document.getElementById('wiki-modal').style.display = 'flex';
-        }
-
-        function closeWikiModal() { document.getElementById('wiki-modal').style.display = 'none'; }
-
-        document.getElementById('wiki-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const category = document.getElementById('wiki-category').value;
-            const title = document.getElementById('wiki-title').value;
-            const content = document.getElementById('wiki-content').value;
-            const source = document.getElementById('wiki-source').value;
-            const image = document.getElementById('wiki-image').value || 'https://via.placeholder.com/400x200?text=Cotton';
-
-            if (currentEditingIndex === -1) { wikiData.push({ category, title, content, source, image }); } 
-            else { wikiData[currentEditingIndex] = { category, title, content, source, image }; }
-
-            saveWikiData();
-            renderWiki('all');
-            closeWikiModal();
-        });
-
-        function deleteWikiCard(index) {
-            if (confirm('确定要删除这张知识卡片吗？')) {
-                wikiData.splice(index, 1);
-                saveWikiData(); renderWiki('all');
-            }
-        }
-
-        function saveWikiData() { localStorage.setItem('wikiData', JSON.stringify(wikiData)); }
-
-        function loadWikiData() {
-            const dataVersion = localStorage.getItem('wikiDataVersion');
-            const currentVersion = '2025-03-29-v7'; 
-            if (dataVersion !== currentVersion) {
-                localStorage.setItem('wikiData', JSON.stringify(wikiData));
-                localStorage.setItem('wikiDataVersion', currentVersion);
-            } else {
-                const savedData = localStorage.getItem('wikiData');
-                if (savedData) { wikiData = JSON.parse(savedData); }
-            }
-        }
-
-        function viewWikiDetail(index) {
-            const item = wikiData[index];
-            const detailContent = document.getElementById('detail-content');
-            document.getElementById('detail-title').textContent = item.title;
-
-            detailContent.innerHTML = `
-                    <div style="margin-bottom: 20px;">
-                        <div style="position: relative; height: 200px; overflow: hidden; border-radius: 8px; margin-bottom: 15px;">
-                            <img src="${item.image || 'https://via.placeholder.com/600x300?text=Cotton'}"
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                            <span style="position: absolute; top: 10px; left: 10px; background: var(--portal-green); color: white; padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">
-                                ${getCatName(item.category)}
-                            </span>
-                        </div>
-                        <h4 style="margin: 0 0 10px 0; color: var(--primary); font-size: 1.2rem;">${item.title}</h4>
-                        <p style="font-size: 1rem; color: #475569; line-height: 1.6; margin-bottom: 15px;">
-                            ${item.content}
-                        </p>
-                        <div style="border-top: 1px solid #f1f5f9; padding-top: 10px; font-size: 0.9rem; color: #64748b;">
-                            <p><strong>来源：</strong>${item.source}</p>
-                        </div>
-                    </div>
-                `;
-            document.getElementById('wiki-detail-modal').style.display = 'flex';
-        }
-
-        function closeWikiDetailModal() { document.getElementById('wiki-detail-modal').style.display = 'none'; }
-
-        // 4. 渲染社区心得的函数
-        function renderCommunity() {
-            const list = document.getElementById('community-list');
-            if (!list) return;
-            list.innerHTML = communityPosts.slice().reverse().map(post => `
-                    <div class="dash-card" style="padding: 10px; border-radius: 8px; background: white; border: 1px solid #edf2f7; margin-bottom: 5px;">
-                        <div style="font-weight: bold; color: var(--portal-green); font-size: 0.85rem; margin-bottom: 3px;">@${post.user}</div>
-                        <div style="font-size: 0.8rem; color: #334155;">${post.content}</div>
-                        <div style="text-align: right; color: var(--text-light); font-size: 0.65rem; margin-top: 5px;">${post.time}</div>
-                    </div>
-                `).join('');
-        }
-
-        // 5. 发布心得的函数
-        function postToCommunity() {
-            if (!currentUser) { openLoginModal('wiki'); return; }
-            const input = document.getElementById('community-input');
-            const content = input.value.trim();
-            if (!content) return alert("请输入内容");
-            communityPosts.push({ user: currentUser.username, content: content, time: "刚刚" });
-            input.value = '';
-            localStorage.setItem('public_community_posts', JSON.stringify(communityPosts));
-            if (currentUser) { localStorage.setItem(`user_${currentUser.username}_posts`, JSON.stringify(communityPosts)); }
-            renderCommunity();
-        }
-
-        function filterWiki(cat) {
-            renderWiki(cat);
-            document.querySelectorAll('#wiki-filters .btn-outline').forEach(btn => {
-                btn.style.borderColor = 'var(--border)';
-                btn.style.color = 'var(--text-light)';
-            });
-            event.target.style.borderColor = 'var(--portal-green)';
-            event.target.style.color = 'var(--portal-green)';
-        }
-
-        // ==========================================
-        // 全局状态与解耦路由控制
-        // ==========================================
         let pendingView = 'home';
 
         window.onload = () => {
             checkLoginStatus();
-            loadWikiData();
             updateHeaderAuthUI();
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
             switchView('home');
         };
 
@@ -2611,19 +859,6 @@
                 document.getElementById('btn-show-login').style.display = 'block';
                 document.getElementById('user-profile').style.display = 'none';
             }
-        }
-
-        function openWikiModal() {
-            if (!currentUser) { openLoginModal('wiki'); return; }
-            if (currentUser.role === 'farmer') {
-                alert("🔒 无相关权限：\n仅【植保专家】或【平台管理员】可发布官方百科卡片！\n如需提问或交流，请使用右侧的【种植心得社区】。");
-                return;
-            }
-            currentEditingIndex = -1;
-            document.getElementById('modal-title').textContent = '添加知识卡片';
-            document.getElementById('wiki-form').reset();
-            document.getElementById('wiki-id').value = '';
-            document.getElementById('wiki-modal').style.display = 'flex';
         }
 
         function requireAuth(targetView) {
@@ -2650,8 +885,6 @@
             if (viewName === 'monitor') { setTimeout(() => map.invalidateSize(), 100); loadFieldsFromStorage(); }
             else if (viewName === 'dashboard') { renderDashboard(); }
             else if (viewName === 'records') { renderRecords(); }
-            else if (viewName === 'wiki') { setTimeout(() => { loadWikiData(); renderWiki('all'); renderCommunity(); }, 100); }
-            else if (viewName === 'weather') { setTimeout(() => { loadWeatherData(); }, 100); }
         }
 
         function openLoginModal(target) { pendingView = target || 'home'; document.getElementById('login-modal').style.display = 'flex'; toggleAuthMode('login'); }
@@ -2914,7 +1147,6 @@
                     img.src = result.data.result_image;
                     const pestCount = result.data.pest_count;
 
-                    // 🚨 修改 2：升级“检测结果比对框”
                     let resultHtml = `
                     <div style="background: white; border: 1px solid var(--border); padding: 15px; border-radius: 12px; box-shadow: var(--shadow-sm); margin-bottom: 15px;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -3123,7 +1355,6 @@
                     const color = r.risk === "高风险" ? "var(--danger)" : "var(--success)";
                     const formatAdvice = r.advice ? r.advice.replace(/\n/g, '<br>') : "暂无建议";
 
-                    // 🚨 修改 3：终极美化“档案库闭环时间线”
                     let statusBadge = '';
                     if (r.recordType === 'initial') {
                         if (r.loopStatus === 'pending') statusBadge = '<span style="background:#fef3c7; color:#d97706; padding:4px 10px; border-radius:20px; font-size:0.75rem; margin-left:10px; font-weight:bold;">🕒 待复检闭环</span>';
@@ -3367,8 +1598,6 @@
 
         function changeMonth(direction) { currentDate.setMonth(currentDate.getMonth() + direction); generateCalendar(currentDate.getFullYear(), currentDate.getMonth()); }
 
-        window.addEventListener('load', () => { generateCalendar(currentDate.getFullYear(), currentDate.getMonth()); loadWeatherData(); });
-
         function editTimelineItem(index) {
             const timelineItem = document.querySelectorAll('.timeline-item')[index];
             document.getElementById('editTimelineIndex').value = index;
@@ -3402,135 +1631,6 @@
         function closeTimelineModal() { document.getElementById('timelineEditModal').style.display = 'none'; }
         window.onclick = function (event) { const modal = document.getElementById('timelineEditModal'); if (event.target == modal) { modal.style.display = 'none'; } }
 
-        // 气象状况功能
-        let currentLocation = 'shihezi'; let currentWeatherTab = 'forecast';
-
-        const weatherData = {
-            shihezi: {
-                forecast: [ { date: '4月1日', icon: '☀️', temp: 15, tempMin: 2, humidity: 45, wind: 2.5, desc: '晴天' }, { date: '4月2日', icon: '⛅', temp: 16, tempMin: 3, humidity: 40, wind: 3.0, desc: '多云' }, { date: '4月3日', icon: '🌧️', temp: 12, tempMin: 5, humidity: 75, wind: 1.5, desc: '小雨' }, { date: '4月4日', icon: '⛅', temp: 14, tempMin: 4, humidity: 55, wind: 2.0, desc: '多云' }, { date: '4月5日', icon: '☀️', temp: 17, tempMin: 6, humidity: 35, wind: 3.5, desc: '晴天' }, { date: '4月6日', icon: '☀️', temp: 18, tempMin: 7, humidity: 30, wind: 4.0, desc: '晴天' }, { date: '4月7日', icon: '⛅', temp: 16, tempMin: 5, humidity: 45, wind: 2.5, desc: '多云' }, { date: '4月8日', icon: '🌧️', temp: 13, tempMin: 6, humidity: 70, wind: 1.8, desc: '小雨' }, { date: '4月9日', icon: '⛅', temp: 15, tempMin: 4, humidity: 50, wind: 2.2, desc: '多云' }, { date: '4月10日', icon: '☀️', temp: 19, tempMin: 8, humidity: 30, wind: 3.8, desc: '晴天' }, { date: '4月11日', icon: '☀️', temp: 20, tempMin: 9, humidity: 25, wind: 4.2, desc: '晴天' }, { date: '4月12日', icon: '⛅', temp: 17, tempMin: 7, humidity: 40, wind: 3.0, desc: '多云' }, { date: '4月13日', icon: '⛅', temp: 16, tempMin: 6, humidity: 45, wind: 2.8, desc: '多云' }, { date: '4月14日', icon: '☀️', temp: 18, tempMin: 8, humidity: 35, wind: 3.5, desc: '晴天' }, { date: '4月15日', icon: '☀️', temp: 21, tempMin: 9, humidity: 28, wind: 4.5, desc: '晴天' } ],
-                history: [ { date: '3月25日', icon: '⛅', temp: 13, tempMin: 0, humidity: 50, wind: 2.0, desc: '多云' }, { date: '3月26日', icon: '🌧️', temp: 10, tempMin: 2, humidity: 75, wind: 1.5, desc: '小雨' }, { date: '3月27日', icon: '⛅', temp: 12, tempMin: 1, humidity: 55, wind: 2.2, desc: '多云' }, { date: '3月28日', icon: '☀️', temp: 15, tempMin: 3, humidity: 40, wind: 3.0, desc: '晴天' }, { date: '3月29日', icon: '☀️', temp: 16, tempMin: 4, humidity: 35, wind: 3.5, desc: '晴天' }, { date: '3月30日', icon: '⛅', temp: 14, tempMin: 2, humidity: 45, wind: 2.5, desc: '多云' }, { date: '3月31日', icon: '☀️', temp: 17, tempMin: 5, humidity: 30, wind: 4.0, desc: '晴天' } ]
-            },
-            wusu: {
-                forecast: [ { date: '4月1日', icon: '⛅', temp: 14, tempMin: 1, humidity: 48, wind: 2.2, desc: '多云' }, { date: '4月2日', icon: '☀️', temp: 16, tempMin: 3, humidity: 42, wind: 2.8, desc: '晴天' }, { date: '4月3日', icon: '🌧️', temp: 11, tempMin: 4, humidity: 78, wind: 1.3, desc: '小雨' }, { date: '4月4日', icon: '⛅', temp: 13, tempMin: 3, humidity: 58, wind: 1.8, desc: '多云' }, { date: '4月5日', icon: '☀️', temp: 16, tempMin: 5, humidity: 38, wind: 3.2, desc: '晴天' }, { date: '4月6日', icon: '☀️', temp: 17, tempMin: 6, humidity: 32, wind: 3.8, desc: '晴天' }, { date: '4月7日', icon: '⛅', temp: 15, tempMin: 4, humidity: 46, wind: 2.3, desc: '多云' }, { date: '4月8日', icon: '🌧️', temp: 12, tempMin: 5, humidity: 72, wind: 1.6, desc: '小雨' }, { date: '4月9日', icon: '⛅', temp: 14, tempMin: 3, humidity: 52, wind: 2.0, desc: '多云' }, { date: '4月10日', icon: '☀️', temp: 18, tempMin: 7, humidity: 32, wind: 3.5, desc: '晴天' }, { date: '4月11日', icon: '☀️', temp: 19, tempMin: 8, humidity: 28, wind: 4.0, desc: '晴天' }, { date: '4月12日', icon: '⛅', temp: 16, tempMin: 6, humidity: 42, wind: 2.8, desc: '多云' }, { date: '4月13日', icon: '⛅', temp: 15, tempMin: 5, humidity: 48, wind: 2.5, desc: '多云' }, { date: '4月14日', icon: '☀️', temp: 17, tempMin: 7, humidity: 35, wind: 3.2, desc: '晴天' }, { date: '4月15日', icon: '☀️', temp: 20, tempMin: 8, humidity: 30, wind: 4.2, desc: '晴天' } ],
-                history: [ { date: '3月25日', icon: '🌧️', temp: 9, tempMin: -1, humidity: 80, wind: 1.2, desc: '小雨' }, { date: '3月26日', icon: '⛅', temp: 11, tempMin: 0, humidity: 60, wind: 1.8, desc: '多云' }, { date: '3月27日', icon: '☀️', temp: 13, tempMin: 2, humidity: 45, wind: 2.5, desc: '晴天' }, { date: '3月28日', icon: '☀️', temp: 14, tempMin: 3, humidity: 40, wind: 3.0, desc: '晴天' }, { date: '3月29日', icon: '⛅', temp: 13, tempMin: 2, humidity: 50, wind: 2.2, desc: '多云' }, { date: '3月30日', icon: '⛅', temp: 12, tempMin: 1, humidity: 55, wind: 2.0, desc: '多云' }, { date: '3月31日', icon: '☀️', temp: 15, tempMin: 4, humidity: 35, wind: 3.5, desc: '晴天' } ]
-            },
-            kuqa: {
-                forecast: [ { date: '4月1日', icon: '☀️', temp: 18, tempMin: 8, humidity: 30, wind: 3.0, desc: '晴天' }, { date: '4月2日', icon: '☀️', temp: 19, tempMin: 9, humidity: 28, wind: 3.5, desc: '晴天' }, { date: '4月3日', icon: '⛅', temp: 16, tempMin: 7, humidity: 40, wind: 2.5, desc: '多云' }, { date: '4月4日', icon: '☀️', temp: 17, tempMin: 8, humidity: 32, wind: 3.2, desc: '晴天' }, { date: '4月5日', icon: '☀️', temp: 20, tempMin: 10, humidity: 25, wind: 4.0, desc: '晴天' }, { date: '4月6日', icon: '☀️', temp: 21, tempMin: 11, humidity: 22, wind: 4.5, desc: '晴天' }, { date: '4月7日', icon: '⛅', temp: 18, tempMin: 9, humidity: 35, wind: 3.0, desc: '多云' }, { date: '4月8日', icon: '⛅', temp: 17, tempMin: 8, humidity: 38, wind: 2.8, desc: '多云' }, { date: '4月9日', icon: '☀️', temp: 19, tempMin: 10, humidity: 28, wind: 3.5, desc: '晴天' }, { date: '4月10日', icon: '☀️', temp: 22, tempMin: 12, humidity: 20, wind: 5.0, desc: '晴天' }, { date: '4月11日', icon: '☀️', temp: 23, tempMin: 13, humidity: 18, wind: 5.5, desc: '晴天' }, { date: '4月12日', icon: '⛅', temp: 20, tempMin: 11, humidity: 30, wind: 3.8, desc: '多云' }, { date: '4月13日', icon: '☀️', temp: 21, tempMin: 12, humidity: 22, wind: 4.2, desc: '晴天' }, { date: '4月14日', icon: '☀️', temp: 22, tempMin: 13, humidity: 20, wind: 4.8, desc: '晴天' }, { date: '4月15日', icon: '☀️', temp: 24, tempMin: 14, humidity: 15, wind: 6.0, desc: '晴天' } ],
-                history: [ { date: '3月25日', icon: '☀️', temp: 16, tempMin: 6, humidity: 35, wind: 2.8, desc: '晴天' }, { date: '3月26日', icon: '⛅', temp: 15, tempMin: 5, humidity: 42, wind: 2.5, desc: '多云' }, { date: '3月27日', icon: '☀️', temp: 17, tempMin: 7, humidity: 30, wind: 3.2, desc: '晴天' }, { date: '3月28日', icon: '☀️', temp: 18, tempMin: 8, humidity: 28, wind: 3.5, desc: '晴天' }, { date: '3月29日', icon: '☀️', temp: 19, tempMin: 9, humidity: 25, wind: 4.0, desc: '晴天' }, { date: '3月30日', icon: '⛅', temp: 16, tempMin: 7, humidity: 38, wind: 2.8, desc: '多云' }, { date: '3月31日', icon: '☀️', temp: 18, tempMin: 8, humidity: 30, wind: 3.5, desc: '晴天' } ]
-            },
-            korla: {
-                forecast: [ { date: '4月1日', icon: '☀️', temp: 17, tempMin: 7, humidity: 35, wind: 3.2, desc: '晴天' }, { date: '4月2日', icon: '⛅', temp: 16, tempMin: 6, humidity: 42, wind: 2.8, desc: '多云' }, { date: '4月3日', icon: '⛅', temp: 15, tempMin: 5, humidity: 45, wind: 2.5, desc: '多云' }, { date: '4月4日', icon: '☀️', temp: 18, tempMin: 8, humidity: 32, wind: 3.5, desc: '晴天' }, { date: '4月5日', icon: '☀️', temp: 19, tempMin: 9, humidity: 28, wind: 4.0, desc: '晴天' }, { date: '4月6日', icon: '☀️', temp: 20, tempMin: 10, humidity: 25, wind: 4.2, desc: '晴天' }, { date: '4月7日', icon: '⛅', temp: 17, tempMin: 8, humidity: 38, wind: 3.0, desc: '多云' }, { date: '4月8日', icon: '⛅', temp: 16, tempMin: 7, humidity: 40, wind: 2.8, desc: '多云' }, { date: '4月9日', icon: '☀️', temp: 18, tempMin: 9, humidity: 32, wind: 3.5, desc: '晴天' }, { date: '4月10日', icon: '☀️', temp: 21, tempMin: 11, humidity: 22, wind: 4.5, desc: '晴天' }, { date: '4月11日', icon: '☀️', temp: 22, tempMin: 12, humidity: 20, wind: 5.0, desc: '晴天' }, { date: '4月12日', icon: '⛅', temp: 19, tempMin: 10, humidity: 30, wind: 3.8, desc: '多云' }, { date: '4月13日', icon: '☀️', temp: 20, tempMin: 11, humidity: 25, wind: 4.0, desc: '晴天' }, { date: '4月14日', icon: '☀️', temp: 21, tempMin: 12, humidity: 22, wind: 4.5, desc: '晴天' }, { date: '4月15日', icon: '☀️', temp: 23, tempMin: 13, humidity: 18, wind: 5.5, desc: '晴天' } ],
-                history: [ { date: '3月25日', icon: '⛅', temp: 14, tempMin: 3, humidity: 48, wind: 2.2, desc: '多云' }, { date: '3月26日', icon: '☀️', temp: 16, tempMin: 5, humidity: 38, wind: 3.0, desc: '晴天' }, { date: '3月27日', icon: '☀️', temp: 17, tempMin: 6, humidity: 35, wind: 3.2, desc: '晴天' }, { date: '3月28日', icon: '⛅', temp: 15, tempMin: 4, humidity: 45, wind: 2.5, desc: '多云' }, { date: '3月29日', icon: '☀️', temp: 16, tempMin: 5, humidity: 38, wind: 3.0, desc: '晴天' }, { date: '3月30日', icon: '☀️', temp: 17, tempMin: 6, humidity: 35, wind: 3.2, desc: '晴天' }, { date: '3月31日', icon: '⛅', temp: 16, tempMin: 5, humidity: 40, wind: 2.8, desc: '多云' } ]
-            },
-            alashan: {
-                forecast: [ { date: '4月1日', icon: '⛅', temp: 15, tempMin: 4, humidity: 42, wind: 2.5, desc: '多云' }, { date: '4月2日', icon: '☀️', temp: 17, tempMin: 6, humidity: 35, wind: 3.5, desc: '晴天' }, { date: '4月3日', icon: '☀️', temp: 18, tempMin: 7, humidity: 32, wind: 4.0, desc: '晴天' }, { date: '4月4日', icon: '⛅', temp: 16, tempMin: 5, humidity: 40, wind: 3.0, desc: '多云' }, { date: '4月5日', icon: '☀️', temp: 19, tempMin: 8, humidity: 28, wind: 4.2, desc: '晴天' }, { date: '4月6日', icon: '☀️', temp: 20, tempMin: 9, humidity: 25, wind: 4.5, desc: '晴天' }, { date: '4月7日', icon: '⛅', temp: 17, tempMin: 7, humidity: 38, wind: 3.2, desc: '多云' }, { date: '4月8日', icon: '☀️', temp: 18, tempMin: 8, humidity: 32, wind: 3.8, desc: '晴天' }, { date: '4月9日', icon: '☀️', temp: 19, tempMin: 9, humidity: 28, wind: 4.0, desc: '晴天' }, { date: '4月10日', icon: '⛅', temp: 17, tempMin: 7, humidity: 38, wind: 3.2, desc: '多云' }, { date: '4月11日', icon: '☀️', temp: 20, tempMin: 10, humidity: 25, wind: 4.5, desc: '晴天' }, { date: '4月12日', icon: '☀️', temp: 21, tempMin: 11, humidity: 22, wind: 5.0, desc: '晴天' }, { date: '4月13日', icon: '⛅', temp: 18, tempMin: 9, humidity: 35, wind: 3.5, desc: '多云' }, { date: '4月14日', icon: '☀️', temp: 19, tempMin: 10, humidity: 28, wind: 4.0, desc: '晴天' }, { date: '4月15日', icon: '☀️', temp: 22, tempMin: 12, humidity: 20, wind: 5.5, desc: '晴天' } ],
-                history: [ { date: '3月25日', icon: '☀️', temp: 13, tempMin: 2, humidity: 45, wind: 2.0, desc: '晴天' }, { date: '3月26日', icon: '⛅', temp: 12, tempMin: 1, humidity: 50, wind: 1.8, desc: '多云' }, { date: '3月27日', icon: '☀️', temp: 14, tempMin: 3, humidity: 40, wind: 2.5, desc: '晴天' }, { date: '3月28日', icon: '☀️', temp: 15, tempMin: 4, humidity: 35, wind: 3.0, desc: '晴天' }, { date: '3月29日', icon: '⛅', temp: 13, tempMin: 2, humidity: 45, wind: 2.2, desc: '多云' }, { date: '3月30日', icon: '☀️', temp: 15, tempMin: 4, humidity: 35, wind: 3.0, desc: '晴天' }, { date: '3月31日', icon: '☀️', temp: 16, tempMin: 5, humidity: 30, wind: 3.5, desc: '晴天' } ]
-            }
-        };
-
-        function loadWeatherData() {
-            const weatherContent = document.getElementById('weatherContent');
-            weatherContent.innerHTML = '<div class="weather-loading">正在加载天气数据</div>';
-            setTimeout(() => { const data = weatherData[currentLocation][currentWeatherTab]; renderWeatherData(data); }, 800);
-        }
-
-        function renderWeatherData(data) {
-            const weatherContent = document.getElementById('weatherContent');
-            let weatherHtml = '<div class="weather-grid">';
-            data.forEach(day => {
-                weatherHtml += `
-                        <div class="weather-card">
-                            <div class="weather-date">${day.date}</div>
-                            <div class="weather-icon">${day.icon}</div>
-                            <div class="weather-temp">${day.temp}°</div>
-                            <div class="weather-desc">${day.desc}</div>
-                            <div class="weather-detail">
-                                <small>最低: ${day.tempMin}°</small>
-                                <small>湿度: ${day.humidity}%</small>
-                                <small>风速: ${day.wind}m/s</small>
-                            </div>
-                        </div>`;
-            });
-            weatherHtml += '</div>';
-
-            weatherHtml += `<div class="weather-chart"><div class="chart-title">温度趋势</div><div class="temperature-chart"><div class="chart-container" id="temperatureChart"></div></div></div>`;
-            weatherHtml += `<div class="weather-chart"><div class="chart-title">湿度趋势</div><div class="humidity-chart"><div class="chart-container" id="humidityChart"></div></div></div>`;
-            weatherHtml += `<div class="weather-chart"><div class="chart-title">风速趋势</div><div class="wind-chart"><div class="chart-container" id="windChart"></div></div></div>`;
-            weatherContent.innerHTML = weatherHtml;
-
-            drawTemperatureChart(data); drawHumidityChart(data); drawWindChart(data);
-        }
-
-        function drawTemperatureChart(data) {
-            const canvas = document.createElement('canvas'); canvas.width = 800; canvas.height = 250;
-            document.getElementById('temperatureChart').appendChild(canvas);
-            const ctx = canvas.getContext('2d'); const padding = 40; const width = canvas.width - padding * 2; const height = canvas.height - padding * 2;
-            const dates = data.map(d => d.date); const temps = data.map(d => d.temp); const tempMins = data.map(d => d.tempMin);
-            const maxTemp = Math.max(...temps) + 2; const minTemp = Math.min(...tempMins) - 2; const tempRange = maxTemp - minTemp;
-
-            ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
-            for (let i = 0; i <= 5; i++) {
-                const y = padding + (height / 5) * i; ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(canvas.width - padding, y); ctx.stroke();
-                const temp = maxTemp - (tempRange / 5) * i; ctx.fillStyle = '#666'; ctx.font = '12px Arial'; ctx.textAlign = 'right'; ctx.fillText(`${temp}°`, padding - 10, y + 4);
-            }
-            ctx.fillStyle = '#666'; ctx.font = '12px Arial'; ctx.textAlign = 'center';
-            data.forEach((d, i) => { const x = padding + (width / (data.length - 1)) * i; ctx.fillText(d.date, x, canvas.height - padding + 15); });
-
-            ctx.strokeStyle = '#ff8c00'; ctx.lineWidth = 2; ctx.beginPath();
-            temps.forEach((temp, i) => { const x = padding + (width / (temps.length - 1)) * i; const y = padding + height - ((temp - minTemp) / tempRange) * height; if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } }); ctx.stroke();
-            ctx.fillStyle = '#ff8c00'; temps.forEach((temp, i) => { const x = padding + (width / (temps.length - 1)) * i; const y = padding + height - ((temp - minTemp) / tempRange) * height; ctx.beginPath(); ctx.arc(x, y, 4, 0, 2 * Math.PI); ctx.fill(); });
-            ctx.strokeStyle = '#87ceeb'; ctx.lineWidth = 2; ctx.beginPath();
-            tempMins.forEach((temp, i) => { const x = padding + (width / (tempMins.length - 1)) * i; const y = padding + height - ((temp - minTemp) / tempRange) * height; if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } }); ctx.stroke();
-            ctx.fillStyle = '#87ceeb'; tempMins.forEach((temp, i) => { const x = padding + (width / (tempMins.length - 1)) * i; const y = padding + height - ((temp - minTemp) / tempRange) * height; ctx.beginPath(); ctx.arc(x, y, 4, 0, 2 * Math.PI); ctx.fill(); });
-        }
-
-        function drawHumidityChart(data) {
-            const canvas = document.createElement('canvas'); canvas.width = 800; canvas.height = 250;
-            document.getElementById('humidityChart').appendChild(canvas);
-            const ctx = canvas.getContext('2d'); const padding = 40; const width = canvas.width - padding * 2; const height = canvas.height - padding * 2;
-            const dates = data.map(d => d.date); const humidity = data.map(d => d.humidity);
-            const maxHumidity = 100; const minHumidity = 0; const humidityRange = maxHumidity - minHumidity;
-
-            ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
-            for (let i = 0; i <= 5; i++) {
-                const y = padding + (height / 5) * i; ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(canvas.width - padding, y); ctx.stroke();
-                const hum = maxHumidity - (humidityRange / 5) * i; ctx.fillStyle = '#666'; ctx.font = '12px Arial'; ctx.textAlign = 'right'; ctx.fillText(`${hum}%`, padding - 10, y + 4);
-            }
-            ctx.fillStyle = '#666'; ctx.font = '12px Arial'; ctx.textAlign = 'center';
-            data.forEach((d, i) => { const x = padding + (width / (data.length - 1)) * i; ctx.fillText(d.date, x, canvas.height - padding + 15); });
-
-            ctx.strokeStyle = '#1e90ff'; ctx.lineWidth = 2; ctx.beginPath();
-            humidity.forEach((hum, i) => { const x = padding + (width / (humidity.length - 1)) * i; const y = padding + height - ((hum - minHumidity) / humidityRange) * height; if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } }); ctx.stroke();
-            ctx.fillStyle = '#1e90ff'; humidity.forEach((hum, i) => { const x = padding + (width / (humidity.length - 1)) * i; const y = padding + height - ((hum - minHumidity) / humidityRange) * height; ctx.beginPath(); ctx.arc(x, y, 4, 0, 2 * Math.PI); ctx.fill(); });
-        }
-
-        function drawWindChart(data) {
-            const canvas = document.createElement('canvas'); canvas.width = 800; canvas.height = 250;
-            document.getElementById('windChart').appendChild(canvas);
-            const ctx = canvas.getContext('2d'); const padding = 40; const width = canvas.width - padding * 2; const height = canvas.height - padding * 2;
-            const dates = data.map(d => d.date); const wind = data.map(d => d.wind);
-            const maxWind = Math.max(...wind) + 1; const minWind = 0; const windRange = maxWind - minWind;
-
-            ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
-            for (let i = 0; i <= 5; i++) {
-                const y = padding + (height / 5) * i; ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(canvas.width - padding, y); ctx.stroke();
-                const windVal = maxWind - (windRange / 5) * i; ctx.fillStyle = '#666'; ctx.font = '12px Arial'; ctx.textAlign = 'right'; ctx.fillText(`${windVal}m/s`, padding - 10, y + 4);
-            }
-            ctx.fillStyle = '#666'; ctx.font = '12px Arial'; ctx.textAlign = 'center';
-            data.forEach((d, i) => { const x = padding + (width / (data.length - 1)) * i; ctx.fillText(d.date, x, canvas.height - padding + 15); });
-
-            ctx.strokeStyle = '#32cd32'; ctx.lineWidth = 2; ctx.beginPath();
-            wind.forEach((windVal, i) => { const x = padding + (width / (wind.length - 1)) * i; const y = padding + height - ((windVal - minWind) / windRange) * height; if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } }); ctx.stroke();
-            ctx.fillStyle = '#32cd32'; wind.forEach((windVal, i) => { const x = padding + (width / (wind.length - 1)) * i; const y = padding + height - ((windVal - minWind) / windRange) * height; ctx.beginPath(); ctx.arc(x, y, 4, 0, 2 * Math.PI); ctx.fill(); });
-        }
-
-        function switchWeatherTab(tab) {
-            currentWeatherTab = tab;
-            document.querySelectorAll('.weather-tab').forEach(t => t.classList.remove('active')); event.target.classList.add('active');
-            loadWeatherData();
-        }
-
-        function changeLocation() { const select = document.getElementById('locationSelect'); currentLocation = select.value; loadWeatherData(); }
     </script>
 </body>
 </html>
